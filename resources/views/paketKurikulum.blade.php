@@ -5,7 +5,7 @@
 @endsection
 
 @section('body')
-<div class="text">Halaman Dashboard</div>
+<div class="text">Halaman Paket Kurikulum</div>
 @endsection
 
 @section('js')
