@@ -15,7 +15,7 @@
             <div class="col bg-blue text-center">
                 <div class="container left-container">
                     <h2 class="left-welcome">Selamat Datang</h2>
-                    <img class="left-image" src="../img/undraw_programming_re_kg9v.svg">
+                    <img class="left-image" src="../img/login/undraw_programming_re_kg9v.svg">
                     <h6 class="left-appsname">SI SKS PENS 2022</h6>
                 </div>
             </div>
