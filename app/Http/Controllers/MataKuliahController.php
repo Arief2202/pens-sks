@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMataKuliahRequest;
 use App\Http\Requests\UpdateMataKuliahRequest;
 use App\Models\MataKuliah;
+use App\Models\BidangKeahlian;
+use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
 {
@@ -25,7 +27,16 @@ class MataKuliahController extends Controller
      */
     public function create()
     {
-        //
+        return view('mataKuliah.read');
+    }
+
+    public function showCreate()
+    {
+        $namaBidangKeahlian = BidangKeahlian::all();
+        // dd($namaBidangKeahlian);
+        return view('mataKuliah.create', [
+            'bidangKeahlian' => $namaBidangKeahlian,
+        ]);
     }
 
     /**
@@ -34,9 +45,42 @@ class MataKuliahController extends Controller
      * @param  \App\Http\Requests\StoreMataKuliahRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMataKuliahRequest $request)
+    public function saveCreate(Request $request)
     {
-        //
+        $request->validate([
+            'idBidangKeahlian' => ['required', 'string', 'max:255'],
+            'namaMataKuliah' => ['required', 'string', 'max:255']
+        ]);
+        
+        $mataKuliah = MataKuliah::create([
+            'idBidangKeahlian' => $request->idBidangKeahlian,
+            'namaMataKuliah' => $request->namaMataKuliah
+        ]);
+
+        return redirect("/mataKuliah");
+    }
+
+    public function showUpdate()
+    {
+        $namaBidangKeahlian = BidangKeahlian::all();
+        return view('mataKuliah.create', [
+            'bidangKeahlian' => $namaBidangKeahlian,
+        ]);
+    }
+
+    public function saveUpdate(Request $request)
+    {
+        $request->validate([
+            'namaMataKuliah' => ['required', 'string', 'max:255'],
+            //'namaMataKuliah' => ['required', 'string', 'max:255']
+        ]);
+        
+        $mataKuliah = MataKuliah::create([
+            'namaMataKuliah' => $request->namaMataKuliah,
+            //'namaMataKuliah' => $request->namaMataKuliah
+        ]);
+
+        return redirect("/mataKuliah");
     }
 
     /**

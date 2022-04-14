@@ -2,7 +2,7 @@
     <header>
         <div class="image-text">
             <span class="image">
-            <img src="img/sidebar/profile.png" alt="">
+            <img src="http://sks-pens.site/img/sidebar/{{Auth::user()->darkMode == '1' ? 'dark.png' : 'light.png'}}" alt="">
         </span>
 
             <div class="text logo-text">
@@ -20,7 +20,6 @@
                 <i class='bx bx-search icon'></i>
                 <input type="text" placeholder="Search...">
             </li> --}}
-
             <ul class="menu-links">
                 <li class="nav-link {{Request::segment(1) == 'dashboard'? 'active' : ''}}" >
                     <a href="/dashboard">

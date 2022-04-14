@@ -6,7 +6,9 @@
     <meta name="userEmail" content="{{ Auth::user()->email }}"> 
     @yield('style')
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="css/sidebar/style.css">
+    <link rel="stylesheet" href="http://sks-pens.site/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://sks-pens.site/css/sidebar/style.css">
+    
 
     <!----===== Boxicons CSS ===== -->
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
@@ -25,6 +27,6 @@
     </section>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="js/sidebar/script.js"></script>
+    <script type="text/javascript" src="http://sks-pens.site/js/sidebar/script.js"></script>
     @yield('script')
 </body>

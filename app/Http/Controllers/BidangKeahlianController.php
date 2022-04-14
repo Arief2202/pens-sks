@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBidangKeahlianRequest;
 use App\Http\Requests\UpdateBidangKeahlianRequest;
 use App\Models\BidangKeahlian;
+use Illuminate\Http\Request;
 
 class BidangKeahlianController extends Controller
 {
@@ -25,8 +26,14 @@ class BidangKeahlianController extends Controller
      */
     public function create()
     {
-        //
+        return view('bidangKeahlian.read');
     }
+
+    public function showCreate()
+    {
+        return view('bidangKeahlian.create');
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,9 +41,18 @@ class BidangKeahlianController extends Controller
      * @param  \App\Http\Requests\StoreBidangKeahlianRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBidangKeahlianRequest $request)
+    public function saveCreate(Request $request)
     {
-        //
+        
+        $request->validate([
+            'namaBidangKeahlian' => ['required', 'string', 'max:255'],
+        ]);
+        
+        $bidangKeahlian = BidangKeahlian::create([
+            'namaBidangKeahlian' => $request->namaBidangKeahlian,
+        ]);
+
+        return redirect("/bidangKeahlian");
     }
 
     /**

@@ -41,6 +41,9 @@ body.dark{
     --primary-color-light: #3a3b3c;
     --toggle-color: #fff;
     --text-color: #ccc;
+
+    --btn-color: #695CFE;
+    --btn-text-color: #DDD;
 }
 
 /* ===== Sidebar ===== */
@@ -319,4 +322,8 @@ body.dark .switch::before{
 }
 body.dark .home .text{
     color: var(--text-color);
+}
+
+.menu-links, .nav-link{
+    padding: 0;
 }

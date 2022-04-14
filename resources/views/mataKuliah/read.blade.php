@@ -5,7 +5,10 @@
 @endsection
 
 @section('body')
-    <div class="text">Halaman Paket Kurikulum</div>
+    <div class="text">Halaman Mata Kuliah</div>
+    <div class="d-flex justify-content-end me-4">
+        <a class="btn btn-primary" href="/mataKuliah/create" role="button">Tambahkan Data</a>
+    </div>
 @endsection
 
 @section('js')
