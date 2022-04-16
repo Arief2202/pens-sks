@@ -1,28 +1,24 @@
 @extends('layouts.main')
 
-@section('style')
-    <link rel="stylesheet" href="css/bidangKeahlian/style.css">    
-@endsection
-
 @section('body')
-<div class="card container" style="margin-top: 8rem; width: 50rem; height: 25rem;">
-    <div class="card-body">
-        <h5 class="card-title">SKS<br>  Bidang Keahlian - Create</h5>
-        <form method="POST" action="/bidangKeahlian/create">
-            @csrf
-            <div class="py-2">
-                <label for="inputBidangKeahlian">Nama Bidang Keahlian</label>
-                <input type="text" class="form-control" id="inputBidangKeahlian" name="namaBidangKeahlian">
-            </div>
-            <div>
-                <button class="btn btn-primary float-end" type="submit">Create</button>
-                <button class="btn btn-outline-primary float-end mx-2" type="submit">Cancel</button>
-            </div>
-        </form>
-    </div>
-</div>
-@endsection
 
-@section('js')
-    <script type="text/javascript" src="js/bidangKeahlian/script.js"></script> 
+    @include('sections.cardOpen')
+    <form method="POST" action="/bidangKeahlian/create">@csrf
+        <h5 class="card-title">Bidang Keahlian - Create</h5>
+    
+        <div style="max-height: 60vh; overflow-y:auto;">
+            <div class="card-text me-3">
+                <div class="py-2">
+                    <label for="inputBidangKeahlian">Nama Bidang Keahlian</label>
+                    <input type="text" class="form-control" id="inputBidangKeahlian" name="namaBidangKeahlian">
+                </div>
+            </div>
+        </div>
+
+        <div class="float-end mt-4 mb-3 me-3">
+            <a class="btn btn-outline-danger" href="/bidangKeahlian">Cancel</a>
+            <button class="btn btn-success" type="submit">Create</button>
+        </div>
+    </form>        
+    @include('sections.cardClose')
 @endsection

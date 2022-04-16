@@ -15,11 +15,11 @@ class CreatePaketKurikulumsTable extends Migration
     {
         Schema::create('paket_kurikulums', function (Blueprint $table) {
             $table->id();
-            $table->integer('idKurikulum');        
+            $table->foreignId('kurikulum_id');
             $table->string('tingkat');  
             $table->string('prodi');  
             $table->string('semester');   
-            $table->integer('idMataKuliah');     
+            $table->foreignId('mataKuliah_id');
             $table->integer('sksMataKuliah');         
             $table->timestamps();
         });

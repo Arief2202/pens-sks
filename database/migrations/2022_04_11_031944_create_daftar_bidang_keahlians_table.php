@@ -15,8 +15,8 @@ class CreateDaftarBidangKeahliansTable extends Migration
     {
         Schema::create('daftar_bidang_keahlians', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_bidangkeahlian');  
-            $table->integer('id_dosen');  
+            $table->foreignId('bidangKeahlian_id');  
+            $table->foreignId('dosen_id');  
             $table->timestamps();
         });
     }

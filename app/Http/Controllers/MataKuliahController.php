@@ -25,7 +25,7 @@ class MataKuliahController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function read()
     {
         return view('mataKuliah.read');
     }
@@ -53,7 +53,7 @@ class MataKuliahController extends Controller
         ]);
         
         $mataKuliah = MataKuliah::create([
-            'idBidangKeahlian' => $request->idBidangKeahlian,
+            'bidangKeahlian_id' => $request->idBidangKeahlian,
             'namaMataKuliah' => $request->namaMataKuliah
         ]);
 

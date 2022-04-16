@@ -15,9 +15,9 @@ class CreateMengajarsTable extends Migration
     {
         Schema::create('mengajars', function (Blueprint $table) {
             $table->id();
-            $table->integer('idDosen');
-            $table->integer('idkelas');
-            $table->integer('idPaketKurikulum');
+            $table->foreignId('dosen_id');
+            $table->foreignId('kelas_id');
+            $table->foreignId('paketKurikulum_id');
             $table->integer('status');
             $table->timestamps();
         });

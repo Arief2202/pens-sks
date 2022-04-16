@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('idBidangKeahlian')->nullable();
             $table->integer('CreditSKS')->nullable();
             $table->integer('role')->nullable();
             $table->integer('darkMode')->nullable();

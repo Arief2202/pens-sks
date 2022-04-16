@@ -5,7 +5,11 @@ use App\Http\Controllers\ChangeDarkModeController;
 use App\Http\Controllers\changeSidebarStateController;
 use App\Http\Controllers\BidangKeahlianController;
 use App\Http\Controllers\MataKuliahController;
-
+use App\Http\Controllers\PaketKurikulumController;
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\KurikulumController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\SksMaksController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,63 +25,61 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard.read');
-})->middleware(['auth'])->name('dashboard');
-Route::get('/dashboard/create', function () {
-    return view('dashboard.create');
-})->middleware(['auth'])->name('dashboardCreate');
-Route::get('/dashboard/update', function () {
-    return view('dashboard.update');
-})->middleware(['auth'])->name('dashboardUpdate');
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {return view('dashboard.read');})->name('dashboard');
 
-// Route::get('/bidangKeahlian', function () {
-//     return view('bidangKeahlian.read');
-// })->middleware(['auth'])->name('bidangKeahlian');
-// Route::get('/bidangKeahlian/update', function () {
-//     return view('bidangKeahlian.update');
-// })->middleware(['auth'])->name('BidangKeahlianUpdate');
-// Route::get('/bidangKeahlian/create', function () {
-//     return view('bidangKeahlian.create');
-// })->middleware(['auth'])->name('BidangKeahlianCreate');
-Route::get('/bidangKeahlian', [BidangKeahlianController::class, 'create'])->middleware(['auth'])->name('BidangKeahlianCreate');
-Route::get('/bidangKeahlian/create', [BidangKeahlianController::class, 'showCreate'])->middleware(['auth'])->name('BidangKeahlianStoreView');
-Route::post('/bidangKeahlian/create', [BidangKeahlianController::class, 'saveCreate'])->middleware(['auth'])->name('BidangKeahlianStore');
+    Route::controller(BidangKeahlianController::class)->group(function () {
+        Route::get('/bidangKeahlian', 'read')->name('BidangKeahlianCreate');
+        Route::get('/bidangKeahlian/create', 'showCreate')->name('BidangKeahlianStoreView');
+        Route::post('/bidangKeahlian/create', 'saveCreate')->name('BidangKeahlianStore');
+    });
+   
+    Route::controller(MataKuliahController::class)->group(function () {
+        Route::get('/mataKuliah', 'read')->name('MataKuliahCreate');
+        Route::get('/mataKuliah/create', 'showCreate')->name('MataKuliahStoreView');
+        Route::post('/mataKuliah/create', 'saveCreate')->name('MataKuliahStore');
+        Route::get('/mataKuliah/update', 'showUpdate')->name('MataKuliahUpdateView');
+        Route::post('/mataKuliah/update', 'saveUpdate')->name('MataKuliahUpdate');
+    });
 
-// Route::get('/mataKuliah', function () {
-//     return view('mataKuliah.read');
-// })->middleware(['auth'])->name('mataKuliah');
-// Route::get('/mataKuliah/create', function () {
-//     return view('mataKuliah.create');
-// })->middleware(['auth'])->name('mataKuliahCreate');
-// Route::get('/mataKuliah/update', function () {
-//     return view('mataKuliah.update');
-// })->middleware(['auth'])->name('mataKuliahUpdate');
-Route::get('/mataKuliah', [MataKuliahController::class, 'create'])->middleware(['auth'])->name('MataKuliahCreate');
-Route::get('/mataKuliah/create', [MataKuliahController::class, 'showCreate'])->middleware(['auth'])->name('MataKuliahStoreView');
-Route::post('/mataKuliah/create', [MataKuliahController::class, 'saveCreate'])->middleware(['auth'])->name('MataKuliahStore');
-Route::get('/mataKuliah/update', [MataKuliahController::class, 'showUpdate'])->middleware(['auth'])->name('MataKuliahUpdateView');
-Route::post('/mataKuliah/update', [MataKuliahController::class, 'saveUpdate'])->middleware(['auth'])->name('MataKuliahUpdate');
+    Route::controller(dosenController::class)->group(function () {
+        Route::get('/dosen', 'read')->name('DosenCreate');
+        Route::get('/dosen/create', 'showCreate')->name('DosenStoreView');
+        Route::post('/dosen/create', 'saveCreate')->name('DosenStore');
+        Route::get('/dosen/update', 'showUpdate')->name('DosenUpdateView');
+        Route::post('/dosen/update', 'saveUpdate')->name('DosenUpdate');        
+    });
 
-Route::get('/paketKurikulum', function () {
-    return view('paketKurikulum.read');
-})->middleware(['auth'])->name('paketKurikulum');
-Route::get('/paketKurikulum/create', function () {
-    return view('paketKurikulum.create');
-})->middleware(['auth'])->name('paketKurikulumCreate');
-Route::get('/paketKurikulum/update', function () {
-    return view('paketKurikulum/update');
-})->middleware(['auth'])->name('paketKurikulumUpdate');
 
-Route::get('/kelas', function () {
-    return view('kelas.read');
-})->middleware(['auth'])->name('kelas');
-Route::get('/kelas/update', function () {
-    return view('kelas.update');
-})->middleware(['auth'])->name('kelasUpdate');
-Route::get('/kelas/create', function () {
-    return view('kelas.create');
-})->middleware(['auth'])->name('kelasCreate');
+    Route::controller(PaketKurikulumController::class)->group(function () {
+        Route::get('/paketKurikulum', 'read')->name('PaketKurikulumCreate');
+        Route::get('/paketKurikulum/create', 'showCreate')->name('PaketKurikulumStoreView');
+        Route::post('/paketKurikulum/create', 'saveCreate')->name('PaketKurikulumStore');
+        Route::get('/paketKurikulum/update', 'showUpdate')->name('PaketKurikulumUpdateView');
+        Route::post('/paketKurikulum/update', 'saveUpdate')->name('PaketKurikulumUpdate');
+        
+    });
+
+    Route::controller(KurikulumController::class)->group(function () {
+        Route::get('/kurikulum', 'read')->name('KurikulumCreate');
+        Route::get('/kurikulum/create', 'showCreate')->name('KurikulumStoreView');
+        Route::post('/kurikulum/create', 'saveCreate')->name('KurikulumStore');
+        Route::get('/kurikulum/update', 'showUpdate')->name('KurikulumUpdateView');
+        Route::post('/kurikulum/update', 'saveUpdate')->name('KurikulumUpdate');
+        
+    });
+
+    Route::controller(SksMaksController::class)->group(function () {
+        Route::get('/sksMaks/update', 'showUpdate')->name('sksMaksUpdateView');
+        Route::post('/sksMaks/update', 'saveUpdate')->name('sksMaksUpdate');
+    });
+    
+    Route::controller(KelasController::class)->group(function () {
+        Route::get('/kelas', 'read')->name('kelas');
+        Route::get('/kelas/create', 'showCreate')->name('KelasStoreView');
+        Route::post('/kelas/create', 'saveCreate')->name('KelasStore');    
+    });
+});
 
 
 Route::post('/changeDarkMode', [ChangeDarkModeController::class, 'store']); 

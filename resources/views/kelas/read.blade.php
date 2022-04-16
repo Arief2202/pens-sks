@@ -5,10 +5,44 @@
 @endsection
 
 @section('body')
-    <div class="text">Halaman Kelas</div>
-    <div class="d-flex justify-content-end me-4">
-        <a class="btn btn-primary" href="/kelas/create" role="button">Tambahkan Data</a>
-    </div>
+    @include('sections.cardOpen')
+        <div class="row mb-4 mt-2">
+            <div class="col-6">
+                <h5 class="card-title">Halaman Kelas</h5>
+            </div>
+            <div class="col-6">
+                <div class="d-flex justify-content-end ">
+                    <a class="btn btn-primary" href="/kelas/create" role="button">Tambahkan Data</a>
+                </div>
+            </div>
+        </div>
+            <div style="max-height: 60vh; overflow-y:auto;">
+                <div class="card-text me-3">
+                    <table class="table">
+                        <thead class="thead">
+                          <tr>
+                            <th class="th" scope="col">Nama Kelas</th>
+                            <th class="th" scope="col">Kurikulum</th>
+                            <th class="th" scope="col">Tahun Ajaran</th>
+                            <th class="th" scope="col">Edit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @for($a=65;$a<90;$a++)
+                            <tr>
+                              <td>1 D3 IT {{chr($a)}}</td>
+                              <td>2013</td>
+                              <td>2020 - 2021</td>
+                              <td>
+                                  <a href="#"><i class='bx bx-pencil tableAction'></i></a>
+                              </td>
+                            </tr>
+                            @endfor
+                        </tbody>
+                    </table>                    
+                </div>
+            </div>
+    @include('sections.cardClose')
 @endsection
 
 @section('js')

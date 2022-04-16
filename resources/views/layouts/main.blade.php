@@ -7,11 +7,12 @@
     @yield('style')
     <!----======== CSS ======== -->
     <link rel="stylesheet" href="http://sks-pens.site/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://sks-pens.site/css/global.css">
     <link rel="stylesheet" href="http://sks-pens.site/css/sidebar/style.css">
     
 
     <!----===== Boxicons CSS ===== -->
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+    <link rel="stylesheet" href="http://sks-pens.site/boxicons/css/boxicons.min.css">
 
     <title>Dashboard Sidebar Menu</title>
 </head>
@@ -26,7 +27,9 @@
         
     </section>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="http://sks-pens.site/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="http://sks-pens.site/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="http://sks-pens.site/js/sidebar/script.js"></script>
+    <script src="http://sks-pens.site/boxicons/boxicons.js"></script>
     @yield('script')
 </body>

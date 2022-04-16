@@ -5,82 +5,44 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
 use App\Models\Kelas;
+use App\Models\Kurikulum;
+use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function read()
     {
-        //
+        return view('kelas.read');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function showCreate()
     {
-        //
+        $namaKurikulum = Kurikulum::all();
+        return view('kelas.create', [
+            'kurikulum' => $namaKurikulum,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreKelasRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreKelasRequest $request)
+    public function saveCreate(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'namaKelas' => ['required', 'string', 'max:255'],
+            'idKurikulum' => ['required', 'int', 'max:20'],
+            'tingkat' => ['required', 'string', 'max:255'],
+            'prodi' => ['required', 'string', 'max:255'],
+            'semester' => ['required', 'string', 'max:255'],
+            'startTahunAjaran' => ['required', 'string', 'max:255'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kelas $kelas)
-    {
-        //
-    }
+        $paketKurikulum = PaketKurikulum::create([
+            'namaKelas' => $request->namaKelas,
+            'idKurikulum' => $request->idKurikulum,
+            'tingkat' => $request->tingkat,
+            'prodi' => $request->prodi,
+            'semester' => $request->semester,
+            'startTahunAjaran' => $request->startTahunAjaran,
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kelas $kelas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateKelasRequest  $request
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateKelasRequest $request, Kelas $kelas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kelas $kelas)
-    {
-        //
+        return redirect("/kelas");
     }
 }

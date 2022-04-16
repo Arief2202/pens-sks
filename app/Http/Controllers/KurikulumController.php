@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreKurikulumRequest;
 use App\Http\Requests\UpdateKurikulumRequest;
 use App\Models\Kurikulum;
+use Illuminate\Http\Request;
 
 class KurikulumController extends Controller
 {
@@ -23,62 +24,48 @@ class KurikulumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function read()
     {
-        //
+        return view('kurikulum.read');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreKurikulumRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreKurikulumRequest $request)
+    public function showCreate()
     {
-        //
+        return view('kurikulum.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kurikulum  $kurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kurikulum $kurikulum)
+    public function saveCreate(Request $request)
     {
-        //
+        
+        $request->validate([
+            'namaKurikulum' => ['required', 'string', 'max:255'],
+        ]);
+
+        $kurikulum = Kurikulum::create([
+            'namaKurikulum' => $request->namaKurikulum,
+        ]);
+
+        return redirect("/kurikulum");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kurikulum  $kurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kurikulum $kurikulum)
+    public function showUpdate()
     {
-        //
+        return view('kurikulum.update');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateKurikulumRequest  $request
-     * @param  \App\Models\Kurikulum  $kurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateKurikulumRequest $request, Kurikulum $kurikulum)
+    public function saveUpdate(Request $request)
     {
-        //
+        $request->validate([
+            'namaKurikulum' => ['required', 'string', 'max:255'],
+        ]);
+
+        $kurikulum = Kurikulum::create([
+            'namaKurikulum' => $request->namaKurikulum,
+        ]);
+
+        return redirect("/kurikulum");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kurikulum  $kurikulum
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Kurikulum $kurikulum)
     {
         //

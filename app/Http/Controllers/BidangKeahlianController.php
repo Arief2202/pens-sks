@@ -24,7 +24,7 @@ class BidangKeahlianController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function read()
     {
         return view('bidangKeahlian.read');
     }

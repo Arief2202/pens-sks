@@ -18,8 +18,8 @@ class CreateKelasTable extends Migration
             $table->string('tingkat');  
             $table->string('prodi');  
             $table->string('semester');     
-            $table->string('namaKelas');  
-            $table->string('idKurikulum');  
+            $table->string('namaKelas');    
+            $table->foreignId('kurikulum_id');
             $table->date('startTahunAjaran');  
             $table->timestamps();
         });

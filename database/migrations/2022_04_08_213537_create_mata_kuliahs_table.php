@@ -15,7 +15,7 @@ class CreateMataKuliahsTable extends Migration
     {
         Schema::create('mata_kuliahs', function (Blueprint $table) {
             $table->id();
-            $table->integer('idBidangKeahlian');
+            $table->foreignId('bidangKeahlian_id');
             $table->string('namaMataKuliah');
             $table->timestamps();
         });

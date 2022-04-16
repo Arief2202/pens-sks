@@ -2,12 +2,17 @@
     <header>
         <div class="image-text">
             <span class="image">
-            <img src="http://sks-pens.site/img/sidebar/{{Auth::user()->darkMode == '1' ? 'dark.png' : 'light.png'}}" alt="">
+            <img class="fotoProfil" alt="Foto Profil">
+            {{-- <img src="http://sks-pens.site/img/sidebar/{{Auth::user()->darkMode == '1' ? 'dark.png' : 'light.png'}}" alt=""> --}}
         </span>
 
             <div class="text logo-text">
                 <span class="name">{{ Auth::user()->nama }}</span>
-                <span class="profession">Fullstack Developer</span>
+                <span class="profession">
+                    {{Auth::user()->role == 1 ? 'Kaprodi' : ''}}
+                    {{Auth::user()->role == 2 ? 'Dosen' : ''}}
+                    {{Auth::user()->role != 1 && Auth::user()->role != 2 ? 'Unknown' : ''}}
+                </span>
             </div>
         </div>
 
@@ -23,35 +28,49 @@
             <ul class="menu-links">
                 <li class="nav-link {{Request::segment(1) == 'dashboard'? 'active' : ''}}" >
                     <a href="/dashboard">
-                        <i class='bx bx-home-alt icon'></i>
+                        <i class='bx bx-chart icon'></i>
                         <span class="text nav-text">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="nav-link {{Request::segment(1) == 'dosen'? 'active' : ''}}">
+                    <a href="/dosen">
+                        <i class='bx bx-user icon'></i>
+                        <span class="text nav-text">Dosen</span>
                     </a>
                 </li>
 
                 <li class="nav-link {{Request::segment(1) == 'bidangKeahlian'? 'active' : ''}}">
                     <a href="/bidangKeahlian">
-                        <i class='bx bx-bar-chart-alt-2 icon'></i>
+                        <i class='bx icon bx-briefcase'></i>
                         <span class="text nav-text">Bidang Keahlian</span>
                     </a>
                 </li>
 
                 <li class="nav-link {{Request::segment(1) == 'mataKuliah'? 'active' : ''}}">
                     <a href="/mataKuliah">
-                        <i class='bx bx-bell icon'></i>
+                        <i class='bx bx-book icon'></i>
                         <span class="text nav-text">Mata Kuliah</span>
+                    </a>
+                </li>
+
+                <li class="nav-link {{Request::segment(1) == 'kurikulum'? 'active' : ''}}">
+                    <a href="/kurikulum">
+                        <i class='bx bx-bookmark-alt-minus icon'></i>
+                        <span class="text nav-text">Nama Kurikulum</span>
                     </a>
                 </li>
 
                 <li class="nav-link {{Request::segment(1) == 'paketKurikulum'? 'active' : ''}}">
                     <a href="/paketKurikulum">
-                        <i class='bx bx-pie-chart-alt icon'></i>
+                        <i class='bx bx-package icon'></i>
                         <span class="text nav-text">Paket Kurikulum</span>
                     </a>
                 </li>
 
                 <li class="nav-link {{Request::segment(1) == 'kelas'? 'active' : ''}}">
                     <a href="/kelas">
-                        <i class='bx bx-heart icon'></i>
+                        <i class='bx bx-door-open icon'></i>
                         <span class="text nav-text">Kelas</span>
                     </a>
                 </li>
