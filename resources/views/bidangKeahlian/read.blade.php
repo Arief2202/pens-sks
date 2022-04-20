@@ -26,14 +26,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @for($a=1;$a<100;$a++)
+                            @foreach($bidangKeahlian as $bidkah)
                             <tr>
-                              <td>Bidang Keahlian {{$a}}</td>
+                              <td>{{$bidkah['namaBidangKeahlian']}}</td>
                               <td>
                                   <a href="#"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>                    
                 </div>

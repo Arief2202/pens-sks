@@ -124,3 +124,20 @@ body.dark{
     color:var(--text-color);
     transition: var(--tran-05);
 }
+
+.horizontalLine{
+    width: 99%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 3px solid var(--text-color);
+}
+
+.modal-content{
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+.modal-content .modal-header,
+.modal-content .modal-footer{
+    border-color: var(--primary-color-light);
+}

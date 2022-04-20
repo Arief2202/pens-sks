@@ -46,10 +46,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/dosen', 'read')->name('DosenCreate');
         Route::get('/dosen/create', 'showCreate')->name('DosenStoreView');
         Route::post('/dosen/create', 'saveCreate')->name('DosenStore');
-        Route::get('/dosen/update', 'showUpdate')->name('DosenUpdateView');
-        Route::post('/dosen/update', 'saveUpdate')->name('DosenUpdate');        
+        Route::post('/dosen/update/biodata', 'updateEditBiodata');
+        Route::get('/dosen/update/biodata/{id}/', 'viewEditBiodata')->name('DosenUpdate1View');
+        Route::get('/dosen/update/bidangKeahlian/{id}/', 'viewEditBidangKeahlian')->name('DosenUpdate2View');
+        Route::post('/dosen/update/bidangKeahlian/add', 'saveEditBidangKeahlian');
+        Route::post('/dosen/update/bidangKeahlian/delete', 'deleteEditBidangKeahlian');
+        Route::get('/dosen/delete/{id}', 'deleteDosen');      
     });
-
 
     Route::controller(PaketKurikulumController::class)->group(function () {
         Route::get('/paketKurikulum', 'read')->name('PaketKurikulumCreate');

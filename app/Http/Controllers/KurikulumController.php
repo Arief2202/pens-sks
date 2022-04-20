@@ -26,7 +26,10 @@ class KurikulumController extends Controller
      */
     public function read()
     {
-        return view('kurikulum.read');
+        $viewKurikulum = Kurikulum::all();
+        return view('kurikulum.read', [
+            'kurikulums' => $viewKurikulum,
+        ]);
     }
 
     public function showCreate()

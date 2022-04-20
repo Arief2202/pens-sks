@@ -26,7 +26,10 @@ class BidangKeahlianController extends Controller
      */
     public function read()
     {
-        return view('bidangKeahlian.read');
+        $viewBidangKeahlian = BidangKeahlian::all();
+        return view('bidangKeahlian.read', [
+            'bidangKeahlian' => $viewBidangKeahlian,
+        ]);
     }
 
     public function showCreate()

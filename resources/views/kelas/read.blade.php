@@ -22,22 +22,25 @@
                         <thead class="thead">
                           <tr>
                             <th class="th" scope="col">Nama Kelas</th>
+                            <th class="th" scope="col">Semester</th>
                             <th class="th" scope="col">Kurikulum</th>
                             <th class="th" scope="col">Tahun Ajaran</th>
                             <th class="th" scope="col">Edit</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @for($a=65;$a<90;$a++)
+                            @foreach($kelas as $kls)
                             <tr>
-                              <td>1 D3 IT {{chr($a)}}</td>
-                              <td>2013</td>
-                              <td>2020 - 2021</td>
-                              <td>
-                                  <a href="#"><i class='bx bx-pencil tableAction'></i></a>
-                              </td>
+                                <td>{{$kls['tingkat']}} {{$kls['prodi']}} {{$kls['namaKelas']}}</td>
+                                <td>{{$kls['semester']}}</td>
+                                <td>{{$kls->kurikulum()->namaKurikulum}}</td>
+                                <?php if($kls['prodi'] == 'D3') $plus=2; else $plus=3;?>
+                                <td>{{date('Y', strToTime($kls['startTahunAjaran']))}} - {{date('Y', strToTime($kls['startTahunAjaran']))+$plus}}</td>
+                                <td>
+                                    <a href="#"><i class='bx bx-pencil tableAction'></i></a>
+                                </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>                    
                 </div>

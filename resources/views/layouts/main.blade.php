@@ -18,7 +18,7 @@
 </head>
 
 <body class="{{Auth::user()->darkMode == '1' ? 'dark' : ''}}">
-
+    <?php $loggedID = Auth::user()->id?>
     @include('sections.sidebar')
 
     <section class="home">

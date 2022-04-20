@@ -11,4 +11,10 @@ class DaftarBidangKeahlian extends Model
     protected $guarded = [
         'id',
     ];
+    public function bidangKeahlian(){
+        return BidangKeahlian::where('id', $this->bidangKeahlian_id)->first();
+    }
+    public function dosen(){
+        return User::where('id', $this->dosen_id)->first();
+    }
 }

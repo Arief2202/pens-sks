@@ -2,7 +2,7 @@
 
 @section('body')
     @include('sections.cardOpen')
-        <form method="POST" action="kelas/create">
+        <form method="POST" action="/kelas/create">@csrf
             <h5 class="card-title">Kelas - Create</h5>
             <div style="max-height: 60vh; overflow-y:auto;">
                 <div class="card-text me-3">
@@ -47,7 +47,7 @@
                     </div>
                     <div class="py-2 sks">
                         <h6>Tahun Ajaran</h6>
-                            <input type="text" class="form-control" nama="startTahunAjaran">
+                            <input type="date" class="form-control" name="startTahunAjaran">
                     </div>                             
                 </div>
             </div>

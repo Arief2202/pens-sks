@@ -27,7 +27,11 @@ class MataKuliahController extends Controller
      */
     public function read()
     {
-        return view('mataKuliah.read');
+        $namaMataKuliah = MataKuliah::all();
+        // dd($namaBidangKeahlian);
+        return view('mataKuliah.read', [
+            'mataKuliah' => $namaMataKuliah,
+        ]);
     }
 
     public function showCreate()
@@ -49,12 +53,14 @@ class MataKuliahController extends Controller
     {
         $request->validate([
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
-            'namaMataKuliah' => ['required', 'string', 'max:255']
+            'namaMataKuliah' => ['required', 'string', 'max:255'],
+            'sks' => ['required', 'integer', 'max:11'],
         ]);
         
         $mataKuliah = MataKuliah::create([
             'bidangKeahlian_id' => $request->idBidangKeahlian,
-            'namaMataKuliah' => $request->namaMataKuliah
+            'namaMataKuliah' => $request->namaMataKuliah,
+            'sks' => $request->sks,
         ]);
 
         return redirect("/mataKuliah");

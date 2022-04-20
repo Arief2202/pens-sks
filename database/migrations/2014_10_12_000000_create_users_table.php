@@ -17,12 +17,13 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nip')->unique()->nullable();
             $table->string('nama');
+            $table->string('alias')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
-            $table->integer('CreditSKS')->nullable();
-            $table->integer('role')->nullable();
-            $table->integer('darkMode')->nullable();
-            $table->integer('openSideBar')->nullable();
+            $table->string('password')->default('$2y$10$JUUKFmyB9pWCIAcTjC12QOT5XdV7t8peTA3.zbNvaUUj.pwGwBVq.');
+            $table->integer('CreditSKS')->default('23');
+            $table->integer('role')->default('2');
+            $table->integer('darkMode')->default('0');
+            $table->integer('openSideBar')->default('1');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

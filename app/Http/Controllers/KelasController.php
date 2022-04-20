@@ -12,7 +12,10 @@ class KelasController extends Controller
 {
     public function read()
     {
-        return view('kelas.read');
+        $viewKelas = Kelas::all();
+        return view('kelas.read', [
+            'kelas' => $viewKelas
+        ]);
     }
 
     public function showCreate()
@@ -34,9 +37,9 @@ class KelasController extends Controller
             'startTahunAjaran' => ['required', 'string', 'max:255'],
         ]);
 
-        $paketKurikulum = PaketKurikulum::create([
+        $paketKurikulum = Kelas::create([
             'namaKelas' => $request->namaKelas,
-            'idKurikulum' => $request->idKurikulum,
+            'kurikulum_id' => $request->idKurikulum,
             'tingkat' => $request->tingkat,
             'prodi' => $request->prodi,
             'semester' => $request->semester,

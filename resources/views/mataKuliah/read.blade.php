@@ -23,19 +23,27 @@
                           <tr>
                             <th class="th" scope="col">Nama Mata Kuliah</th>
                             <th class="th" scope="col">Bidang Keahlian</th>
+                            <th class="th" scope="col">SKS</th>
                             <th class="th" scope="col">Edit</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @for($a=1;$a<100;$a++)
+                            @foreach($mataKuliah as $mk)
                             <tr>
-                              <td>Mata Kuliah {{$a}}</td>
-                              <td>Bidang Keahlian {{$a}}</td>
+                              <td>{{$mk['namaMataKuliah']}}</td>
+                              <td>
+                              {{-- @foreach($bidangKeahlian as $bk)
+                              @if($bk->id == $mk->idBidangKeahlian) --}}
+                              {{$mk->bidangKeahlian()->namaBidangKeahlian}}
+                              {{-- @endif
+                              @endforeach --}}
+                              </td>
+                              <td>{{$mk['sks']}}</td>
                               <td>
                                   <a href="#"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>                    
                 </div>

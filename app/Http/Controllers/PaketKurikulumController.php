@@ -28,7 +28,10 @@ class PaketKurikulumController extends Controller
      */
     public function read()
     {
-        return view('paketKurikulum.read');
+        $viewPaketKurikulum = PaketKurikulum::all();
+        return view('paketKurikulum.read', [
+            'paketKurikulum' => $viewPaketKurikulum,
+        ]);
     }
 
     public function showCreate()

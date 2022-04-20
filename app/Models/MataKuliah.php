@@ -11,4 +11,8 @@ class MataKuliah extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function bidangKeahlian(){
+        return BidangKeahlian::where('id', $this->bidangKeahlian_id)->first();
+    }
 }

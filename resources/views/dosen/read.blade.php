@@ -23,23 +23,42 @@
                           <tr>
                             <th class="th" scope="col">NIP</th>
                             <th class="th" scope="col">Nama Dosen</th>
+                            <th class="th" scope="col">Keahlian</th>
                             <th class="th" scope="col">Jabatan</th>
                             <th class="th" scope="col">Credit SKS</th>
                             <th class="th" scope="col">Edit</th>
                           </tr>
                         </thead>
                         <tbody>
-                            @for($a=0;$a<99;$a++)
+                            @foreach($user as $dosen)
                             <tr>
-                              <td>31205000{{$a+1<10?'0':''}}{{$a+1}}</td>
-                              <td>Anonymous</td>
-                              <td>Dosen</td>
-                              <td>0</td>
+                              <td>{{$dosen['nip']}}</td>
+                              <td>{{$dosen['nama']}}</td>
+
                               <td>
-                                  <a href="/dosen/edit"><i class='bx bx-pencil tableAction'></i></a>
+                                <?php $totalLoop = 0;?>
+                                @foreach($daftarbidkah as $bidkah)
+                                  @if($bidkah->dosen_id == $dosen->id)
+                                    @if($totalLoop++!=0), &nbsp;@endif
+                                    {{$bidkah->bidangKeahlian()->namaBidangKeahlian}}
+                                  @endif
+                                @endforeach
+                              </td>
+
+                              <td>
+                                @if($dosen->role == 1)
+                                Kaprodi
+                                @elseif($dosen->role == 2)
+                                Dosen
+                                @endif
+                                </td>
+                              <td>{{$dosen['CreditSKS']}}</td>
+                                {{-- kurang sks maks dari masing masing dosen --}}
+                              <td>
+                                <a href="/dosen/update/bidangKeahlian/{{$dosen->id}}" style="background:none;border:none;outline:none;"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>                    
                 </div>

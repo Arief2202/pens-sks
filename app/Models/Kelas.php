@@ -11,4 +11,8 @@ class Kelas extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function kurikulum(){
+        return Kurikulum::where('id', $this->kurikulum_id)->first();
+    }
 }

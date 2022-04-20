@@ -19,8 +19,7 @@ class CreatePaketKurikulumsTable extends Migration
             $table->string('tingkat');  
             $table->string('prodi');  
             $table->string('semester');   
-            $table->foreignId('mataKuliah_id');
-            $table->integer('sksMataKuliah');         
+            $table->foreignId('mataKuliah_id');        
             $table->timestamps();
         });
     }

@@ -22,14 +22,14 @@
                           </tr>
                         </thead>
                         <tbody>
-                            @for($a=1;$a<22;$a++)
+                            @foreach($kurikulums as $kurikulum)
                             <tr>
-                              <td>Kurikulum 20{{$a<10?'0':''}}{{$a}}</td>
+                              <td>{{$kurikulum['namaKurikulum']}}</td>
                               <td>
                                   <a href="#"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
-                            @endfor
+                            @endforeach
                         </tbody>
                     </table>                    
                 </div>

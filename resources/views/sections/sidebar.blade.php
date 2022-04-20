@@ -7,7 +7,7 @@
         </span>
 
             <div class="text logo-text">
-                <span class="name">{{ Auth::user()->nama }}</span>
+                <span class="name">{{ Auth::user()->alias }}</span>
                 <span class="profession">
                     {{Auth::user()->role == 1 ? 'Kaprodi' : ''}}
                     {{Auth::user()->role == 2 ? 'Dosen' : ''}}
@@ -47,19 +47,19 @@
                     </a>
                 </li>
 
-                <li class="nav-link {{Request::segment(1) == 'mataKuliah'? 'active' : ''}}">
+                {{-- <li class="nav-link {{Request::segment(1) == 'mataKuliah'? 'active' : ''}}">
                     <a href="/mataKuliah">
                         <i class='bx bx-book icon'></i>
                         <span class="text nav-text">Mata Kuliah</span>
                     </a>
-                </li>
+                </li> --}}
 
-                <li class="nav-link {{Request::segment(1) == 'kurikulum'? 'active' : ''}}">
+                {{-- <li class="nav-link {{Request::segment(1) == 'kurikulum'? 'active' : ''}}">
                     <a href="/kurikulum">
                         <i class='bx bx-bookmark-alt-minus icon'></i>
                         <span class="text nav-text">Nama Kurikulum</span>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-link {{Request::segment(1) == 'paketKurikulum'? 'active' : ''}}">
                     <a href="/paketKurikulum">

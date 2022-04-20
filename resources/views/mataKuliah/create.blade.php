@@ -19,6 +19,10 @@
                             @endforeach
                     </select>                        
                 </div>
+                <div class="py-2">
+                    <label for="sks">SKS</label>
+                    <input type="number" class="form-control" id="sks" name="sks">
+                </div>
             </div>
         </div>
         <div class="float-end mt-4 mb-3 me-3">
