@@ -46,60 +46,52 @@ class BidangKeahlianController extends Controller
      */
     public function saveCreate(Request $request)
     {
+        $queryBidkah = BidangKeahlian::where('namaBidangKeahlian', '=', $request->namaBidangKeahlian)->first();
+        $request->validate([
+                'namaBidangKeahlian' => ['required', 'string', 'max:255'],
+            ]);
+        if($queryBidkah){
+            return view('bidangKeahlian.create', [
+                'errorMessage' => 'Data sudah ada di database',
+            ]);
+        }
+        else{
+            $bidangKeahlian = BidangKeahlian::create([
+                'namaBidangKeahlian' => $request->namaBidangKeahlian,
+            ]);
+
+            return redirect("/bidangKeahlian");
+        }
         
+    }
+
+    public function showUpdate($id, Request $request)
+    {
+        $bidkah = BidangKeahlian::where('id', $id)->first();
+        return view('bidangKeahlian.update', [
+            'bidangKeahlian' => $bidkah,
+        ]);
+    }
+
+    public function saveUpdate(Request $request)
+    {
+        $queryBidkah = BidangKeahlian::where('id', $request->idBidangKeahlian)->first();
+        $queryValid = BidangKeahlian::where('namaBidangKeahlian', '=', $request->namaBidangKeahlian)->first();
         $request->validate([
             'namaBidangKeahlian' => ['required', 'string', 'max:255'],
         ]);
+        if($queryValid){
+            $bidkah = BidangKeahlian::where('id', $request->idBidangKeahlian)->first();
+            return view('bidangKeahlian.update', [
+                'errorMessage' => 'Data sudah ada di database',
+                'bidangKeahlian' => $bidkah,
+            ]);
+        }
+        else{
+            $queryBidkah['namaBidangKeahlian'] = $request->namaBidangKeahlian;
+            $queryBidkah->save();
+            return redirect("/bidangKeahlian");
+        }
         
-        $bidangKeahlian = BidangKeahlian::create([
-            'namaBidangKeahlian' => $request->namaBidangKeahlian,
-        ]);
-
-        return redirect("/bidangKeahlian");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\BidangKeahlian  $bidangKeahlian
-     * @return \Illuminate\Http\Response
-     */
-    public function show(BidangKeahlian $bidangKeahlian)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BidangKeahlian  $bidangKeahlian
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BidangKeahlian $bidangKeahlian)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateBidangKeahlianRequest  $request
-     * @param  \App\Models\BidangKeahlian  $bidangKeahlian
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateBidangKeahlianRequest $request, BidangKeahlian $bidangKeahlian)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BidangKeahlian  $bidangKeahlian
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BidangKeahlian $bidangKeahlian)
-    {
-        //
     }
 }

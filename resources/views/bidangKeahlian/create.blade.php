@@ -10,7 +10,10 @@
             <div class="card-text me-3">
                 <div class="py-2">
                     <label for="inputBidangKeahlian">Nama Bidang Keahlian</label>
-                    <input type="text" class="form-control" id="inputBidangKeahlian" name="namaBidangKeahlian">
+                    <input type="text" class="form-control @if ($errors->first('namaBidangKeahlian')) is-invalid @endif" id="inputBidangKeahlian" name="namaBidangKeahlian">
+                    @error('namaBidangKeahlian')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>

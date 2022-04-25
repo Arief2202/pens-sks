@@ -40,7 +40,7 @@
                               </td>
                               <td>{{$mk['sks']}}</td>
                               <td>
-                                  <a href="#"><i class='bx bx-pencil tableAction'></i></a>
+                                  <a href="/mataKuliah/update/{{$mk->id}}"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
                             @endforeach

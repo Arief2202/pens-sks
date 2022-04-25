@@ -17,8 +17,7 @@ class CreateMengajarsTable extends Migration
             $table->id();
             $table->foreignId('dosen_id');
             $table->foreignId('kelas_id');
-            $table->foreignId('paketKurikulum_id');
-            $table->integer('status');
+            $table->foreignId('mataKuliah_id');
             $table->timestamps();
         });
     }

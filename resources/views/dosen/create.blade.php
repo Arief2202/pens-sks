@@ -2,22 +2,31 @@
 
 @section('body')
     @include('sections.cardOpen')
-    <form method="POST" action="/dosen/create">@csrf
-        <h5 class="card-title">Dosen - Create</h5>  
-        
+    <form class="need-validation" method="POST" action="/dosen/create">@csrf
+        <h5 class="card-title">Dosen - Create</h5>
+        {{$errors->first('nama')}}
         <div style="max-height: 60vh; overflow-y:auto;">
             <div class="card-text me-3">          
                 <div class="py-2">
                     <label for="inputNama">Nama</label>
-                    <input type="text" class="form-control" id="inputNama" name="nama">
+                    <input value="{{old('nama')}}" type="text" class="form-control @if ($errors->first('nama')) is-invalid @endif" id="inputNama" name="nama">
+                    @error('nama')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="inputNIP">NIP</label>
-                    <input type="text" class="form-control" id="inputNIP" name="nip">
+                    <input value="{{old('nip')}}" type="text" class="form-control @if ($errors->first('nip')) is-invalid @endif" id="inputNIP" name="nip">
+                    @error('nip')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="inputEmail">Email</label>
-                    <input type="Email" class="form-control" id="inputEmail" name="email">
+                    <input value="{{old('email')}}" type="Email" class="form-control @if ($errors->first('email')) is-invalid @endif" id="inputEmail" name="email">
+                    @error('email')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>

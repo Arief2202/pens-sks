@@ -50,43 +50,67 @@ class MataKuliahController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function saveCreate(Request $request)
-    {
+    { 
+        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
         $request->validate([
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
-            'sks' => ['required', 'integer', 'max:11'],
+            'sks' => ['required', 'integer','gt:1', 'max:11'],
         ]);
+        if($queryValid){
+            $namaBidangKeahlian = BidangKeahlian::all();
+            return view('mataKuliah.create', [
+                'errorMessage' => 'Data sudah ada di database',
+                'bidangKeahlian' => $namaBidangKeahlian,
+            ]);
+        }
+        else{
+            $mataKuliah = MataKuliah::create([
+                'bidangKeahlian_id' => $request->idBidangKeahlian,
+                'namaMataKuliah' => $request->namaMataKuliah,
+                'sks' => $request->sks,
+            ]);
+            return redirect("/mataKuliah");
+        }
         
-        $mataKuliah = MataKuliah::create([
-            'bidangKeahlian_id' => $request->idBidangKeahlian,
-            'namaMataKuliah' => $request->namaMataKuliah,
-            'sks' => $request->sks,
-        ]);
-
-        return redirect("/mataKuliah");
     }
 
-    public function showUpdate()
+    public function showUpdate($id, Request $request)
     {
-        $namaBidangKeahlian = BidangKeahlian::all();
-        return view('mataKuliah.create', [
-            'bidangKeahlian' => $namaBidangKeahlian,
+        $matkul = MataKuliah::where('id', $id)->first();
+        $bidkah = BidangKeahlian::all();
+        return view('mataKuliah.update', [
+            'bidangKeahlian' => $bidkah,
+            'mataKuliah' => $matkul,
         ]);
     }
 
     public function saveUpdate(Request $request)
     {
+        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
+        $queryMatkul = MataKuliah::where('id', $request->idMataKuliah)->first();
         $request->validate([
+            'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
-            //'namaMataKuliah' => ['required', 'string', 'max:255']
+            'sks' => ['required', 'integer', 'gt:1', 'max:11'],
         ]);
+        if($queryValid){
+            $matkul = MataKuliah::where('id', $request->idMataKuliah)->first();
+            $bidkah = BidangKeahlian::all();
+            return view('mataKuliah.update', [
+                'errorMessage' => 'Data sudah ada di database',
+                'bidangKeahlian' => $bidkah,
+                'mataKuliah' => $matkul,
+            ]);
+        }
+        else{
+            $queryMatkul['bidangKeahlian_id'] = $request->idBidangKeahlian;
+            $queryMatkul['namaMataKuliah'] = $request->namaMataKuliah;
+            $queryMatkul['sks'] = $request->sks;
+            $queryMatkul->save();
+            return redirect("/mataKuliah");
+        }
         
-        $mataKuliah = MataKuliah::create([
-            'namaMataKuliah' => $request->namaMataKuliah,
-            //'namaMataKuliah' => $request->namaMataKuliah
-        ]);
-
-        return redirect("/mataKuliah");
     }
 
     /**

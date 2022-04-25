@@ -51,21 +51,22 @@ class KurikulumController extends Controller
         return redirect("/kurikulum");
     }
 
-    public function showUpdate()
+    public function showUpdate($id, Request $request)
     {
-        return view('kurikulum.update');
+        $kuri = Kurikulum::where('id', $id)->first();
+        return view('kurikulum.update', [
+            'kurikulum' => $kuri,
+        ]);
     }
 
     public function saveUpdate(Request $request)
     {
+        $queryKuri = Kurikulum::where('id', $request->idKurikulum)->first();
         $request->validate([
             'namaKurikulum' => ['required', 'string', 'max:255'],
         ]);
-
-        $kurikulum = Kurikulum::create([
-            'namaKurikulum' => $request->namaKurikulum,
-        ]);
-
+        $queryKuri['namaKurikulum'] = $request->namaKurikulum;
+        $queryKuri->save();
         return redirect("/kurikulum");
     }
 

@@ -37,7 +37,7 @@
                                 <?php if($kls['prodi'] == 'D3') $plus=2; else $plus=3;?>
                                 <td>{{date('Y', strToTime($kls['startTahunAjaran']))}} - {{date('Y', strToTime($kls['startTahunAjaran']))+$plus}}</td>
                                 <td>
-                                    <a href="#"><i class='bx bx-pencil tableAction'></i></a>
+                                    <a href="/kelas/update/{{$kls->id}}"><i class='bx bx-pencil tableAction'></i></a>
                                 </td>
                             </tr>
                             @endforeach

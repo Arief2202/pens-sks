@@ -10,6 +10,7 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SksMaksController;
+use App\Http\Controllers\MengajarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,13 +33,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/bidangKeahlian', 'read')->name('BidangKeahlianCreate');
         Route::get('/bidangKeahlian/create', 'showCreate')->name('BidangKeahlianStoreView');
         Route::post('/bidangKeahlian/create', 'saveCreate')->name('BidangKeahlianStore');
+        Route::get('/bidangKeahlian/update/{id}/', 'showUpdate')->name('BidangKeahlianUpdateView');
+        Route::post('/bidangKeahlian/update', 'saveUpdate')->name('BidangKeahlianUpdate');
     });
    
     Route::controller(MataKuliahController::class)->group(function () {
         Route::get('/mataKuliah', 'read')->name('MataKuliahCreate');
         Route::get('/mataKuliah/create', 'showCreate')->name('MataKuliahStoreView');
         Route::post('/mataKuliah/create', 'saveCreate')->name('MataKuliahStore');
-        Route::get('/mataKuliah/update', 'showUpdate')->name('MataKuliahUpdateView');
+        Route::get('/mataKuliah/update/{id}/', 'showUpdate')->name('MataKuliahUpdateView');
         Route::post('/mataKuliah/update', 'saveUpdate')->name('MataKuliahUpdate');
     });
 
@@ -56,10 +59,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(PaketKurikulumController::class)->group(function () {
         Route::get('/paketKurikulum', 'read')->name('PaketKurikulumCreate');
-        Route::get('/paketKurikulum/create', 'showCreate')->name('PaketKurikulumStoreView');
-        Route::post('/paketKurikulum/create', 'saveCreate')->name('PaketKurikulumStore');
-        Route::get('/paketKurikulum/update', 'showUpdate')->name('PaketKurikulumUpdateView');
-        Route::post('/paketKurikulum/update', 'saveUpdate')->name('PaketKurikulumUpdate');
+        Route::post('/paketKurikulum', 'create');
+        Route::post('/paketKurikulum/delete', 'delete');
         
     });
 
@@ -67,7 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/kurikulum', 'read')->name('KurikulumCreate');
         Route::get('/kurikulum/create', 'showCreate')->name('KurikulumStoreView');
         Route::post('/kurikulum/create', 'saveCreate')->name('KurikulumStore');
-        Route::get('/kurikulum/update', 'showUpdate')->name('KurikulumUpdateView');
+        Route::get('/kurikulum/update/{id}/', 'showUpdate')->name('KurikulumUpdateView');
         Route::post('/kurikulum/update', 'saveUpdate')->name('KurikulumUpdate');
         
     });
@@ -80,7 +81,12 @@ Route::middleware('auth')->group(function () {
     Route::controller(KelasController::class)->group(function () {
         Route::get('/kelas', 'read')->name('kelas');
         Route::get('/kelas/create', 'showCreate')->name('KelasStoreView');
-        Route::post('/kelas/create', 'saveCreate')->name('KelasStore');    
+        Route::post('/kelas/create', 'saveCreate')->name('KelasStore');   
+        Route::get('/kelas/update/{id}/', 'showUpdate')->name('KelasUpdateView');
+        Route::post('/kelas/update', 'saveUpdate')->name('KelasUpdate');  
+    });
+    Route::controller(MengajarController::class)->group(function () {
+        Route::get('/kelas/mengajar', 'read')->name('mengajar'); 
     });
 });
 

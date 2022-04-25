@@ -8,20 +8,29 @@
             <div class="card-text me-3">            
                 <div class="py-2">
                     <label for="inputMataKuliah">Nama Mata Kuliah</label>
-                    <input type="text" class="form-control" id="inputMataKuliah" name="namaMataKuliah">
+                    <input value="{{old('namaMataKuliah')}}" type="text" class="form-control @if ($errors->first('namaMataKuliah')) is-invalid @endif" id="inputMataKuliah" name="namaMataKuliah">
+                    @error('namaMataKuliah')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="py-2">
                     <h6>Bidang Keahlian</h6>
-                    <select name="idBidangKeahlian" class="form-select" aria-label="Default select example">
+                    <select value="{{old('idBidangKeahlian')}}" name="idBidangKeahlian" class="form-select @if ($errors->first('idBidangKeahlian')) is-invalid @endif" aria-label="Default select example">
                         <option selected hidden> </option>                        
                             @foreach($bidangKeahlian as $bidkah){
                                 <option value="{{$bidkah['id']}}">{{$bidkah['namaBidangKeahlian']}}</option>
                             @endforeach
-                    </select>                        
+                    </select>
+                    @error('idBidangKeahlian')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror                        
                 </div>
                 <div class="py-2">
                     <label for="sks">SKS</label>
-                    <input type="number" class="form-control" id="sks" name="sks">
+                    <input type="number" class="form-control @if ($errors->first('sks')) is-invalid @endif" id="sks" name="sks">
+                    @error('sks')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>

@@ -26,7 +26,7 @@
                             <tr>
                               <td>{{$kurikulum['namaKurikulum']}}</td>
                               <td>
-                                  <a href="#"><i class='bx bx-pencil tableAction'></i></a>
+                                  <a href="/kurikulum/update/{{$kurikulum->id}}"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
                             @endforeach

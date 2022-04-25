@@ -6,13 +6,13 @@
     <meta name="userEmail" content="{{ Auth::user()->email }}"> 
     @yield('style')
     <!----======== CSS ======== -->
-    <link rel="stylesheet" href="http://sks-pens.site/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://sks-pens.site/css/global.css">
-    <link rel="stylesheet" href="http://sks-pens.site/css/sidebar/style.css">
+    <link rel="stylesheet" href="http://{{$_SERVER['HTTP_HOST']}}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://{{$_SERVER['HTTP_HOST']}}/css/global.css">
+    <link rel="stylesheet" href="http://{{$_SERVER['HTTP_HOST']}}/css/sidebar/style.css">
     
 
     <!----===== Boxicons CSS ===== -->
-    <link rel="stylesheet" href="http://sks-pens.site/boxicons/css/boxicons.min.css">
+    <link rel="stylesheet" href="http://{{$_SERVER['HTTP_HOST']}}/boxicons/css/boxicons.min.css">
 
     <title>Dashboard Sidebar Menu</title>
 </head>
@@ -25,11 +25,12 @@
         
         @yield('body')
         
+        
     </section>
 
-    <script type="text/javascript" src="http://sks-pens.site/js/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="http://sks-pens.site/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="http://sks-pens.site/js/sidebar/script.js"></script>
-    <script src="http://sks-pens.site/boxicons/boxicons.js"></script>
+    <script type="text/javascript" src="http://{{$_SERVER['HTTP_HOST']}}/js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="http://{{$_SERVER['HTTP_HOST']}}/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="http://{{$_SERVER['HTTP_HOST']}}/js/sidebar/script.js"></script>
+    <script src="http://{{$_SERVER['HTTP_HOST']}}/boxicons/boxicons.js"></script>
     @yield('script')
 </body>

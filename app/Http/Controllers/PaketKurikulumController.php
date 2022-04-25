@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePaketKurikulumRequest;
 use App\Http\Requests\UpdatePaketKurikulumRequest;
+use Illuminate\Support\Facades\Auth; 
 use App\Models\PaketKurikulum;
 use Illuminate\Http\Request;
 use App\Models\MataKuliah;
@@ -26,122 +27,47 @@ class PaketKurikulumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function read()
+    public function read(Request $request)
     {
-        $viewPaketKurikulum = PaketKurikulum::all();
+        $paketKurikulums = PaketKurikulum::where('tingkat', '=', $request->tingkat)
+                                        ->where('prodi', '=', $request->prodi)
+                                        ->where('semester', '=', $request->semester)
+                                        ->where('kurikulum_id', '=', $request->kurikulum)->get();
         return view('paketKurikulum.read', [
-            'paketKurikulum' => $viewPaketKurikulum,
+            'request' => $request,
+            'paketKurikulums' => $paketKurikulums,
+            'kurikulums' => Kurikulum::all(),
+            'mataKuliahs' => MataKuliah::all(),
         ]);
     }
-
-    public function showCreate()
-    {
-        $namaMataKuliah = MataKuliah::all();
-        $namaKurikulum = Kurikulum::all();
-        return view('paketKurikulum.create', [
-            'mataKuliah' => $namaMataKuliah,
-            'kurikulum' => $namaKurikulum,
-        ]);
-    }
-
-    public function saveCreate(Request $request)
-    {
+    public function create(Request $request){
         $request->validate([
-            'idMataKuliah' => ['required', 'int', 'max:11'],
-            'idKurikulum' => ['required', 'int', 'max:11'],
             'tingkat' => ['required', 'string', 'max:255'],
             'prodi' => ['required', 'string', 'max:255'],
             'semester' => ['required', 'string', 'max:255'],
-            'sksMataKuliah' => ['required', 'int', 'max:11'],
+            'kurikulum' => ['required', 'string', 'max:255'],
+            'idMataKuliah' => ['required', 'string', 'max:255']
         ]);
 
         $paketKurikulum = PaketKurikulum::create([
             'mataKuliah_id' => $request->idMataKuliah,
-            'kurikulum_id' => $request->idKurikulum,
+            'kurikulum_id' => $request->kurikulum,
             'tingkat' => $request->tingkat,
             'prodi' => $request->prodi,
             'semester' => $request->semester,
-            'sksMataKuliah' => $request->sksMataKuliah,
         ]);
-
-        return redirect("/paketKurikulum");
+        return redirect("/paketKurikulum?tingkat=$request->tingkat&prodi=$request->prodi&semester=$request->semester&kurikulum=$request->kurikulum");
     }
-
-    public function showUpdate()
-    {
-        $namaMataKuliah = MataKuliah::all();
-        $namaKurikulum = Kurikulum::all();
-        return view('paketKurikulum.create', [
-            'mataKuliah' => $namaMataKuliah,
-            'kurikulum' => $namaKurikulum,
-        ]);
-    }
-
-    public function saveUpdate(Request $request)
-    {
-        $request->validate([
-            'idMataKuliah' => ['required', 'int', 'max:11'],
-            'idKurikulum' => ['required', 'int', 'max:11'],
-            'tingkat' => ['required', 'string', 'max:255'],
-            'prodi' => ['required', 'string', 'max:255'],
-            'semester' => ['required', 'string', 'max:255'],
-            'sksMataKuliah' => ['required', 'int', 'max:11'],
-        ]);
-
-        $paketKurikulum = PaketKurikulum::create([
-            'mataKuliah_id' => $request->idMataKuliah,
-            'kurikulum_id' => $request->idKurikulum,
-            'tingkat' => $request->tingkat,
-            'prodi' => $request->prodi,
-            'semester' => $request->semester,
-            'sksMataKuliah' => $request->sksMataKuliah,
-        ]);
-
-        return redirect("/paketKurikulum");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PaketKurikulum  $paketKurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PaketKurikulum $paketKurikulum)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PaketKurikulum  $paketKurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PaketKurikulum $paketKurikulum)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePaketKurikulumRequest  $request
-     * @param  \App\Models\PaketKurikulum  $paketKurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePaketKurikulumRequest $request, PaketKurikulum $paketKurikulum)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PaketKurikulum  $paketKurikulum
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PaketKurikulum $paketKurikulum)
-    {
-        //
+    public function delete( Request $request){
+        $paketKurikulum = PaketKurikulum::where('id', $request->id)->first();
+        
+        // $daftarBidangKeahlian = DaftarBidangKeahlian::where('dosen_id', $id)->get();
+        if(Auth::user()->role == 1){
+            // foreach($daftarBidangKeahlian as $daftarbidkah){
+                $paketKurikulum->delete();
+            // }
+            // $dosen->delete();
+        }
+        return redirect("/paketKurikulum?tingkat=$request->tingkat&prodi=$request->prodi&semester=$request->semester&kurikulum=$request->kurikulum");
     }
 }

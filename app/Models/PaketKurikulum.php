@@ -11,4 +11,10 @@ class PaketKurikulum extends Model
     protected $guarded = [
         'id',
     ];
+    public function kurikulum(){
+        return Kurikulum::where('id', $this->kurikulum_id)->first();
+    }
+    public function mataKuliah(){
+        return mataKuliah::where('id', $this->mataKuliah_id)->first();
+    }
 }

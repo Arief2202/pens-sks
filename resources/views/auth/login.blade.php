@@ -15,14 +15,13 @@
             <div class="col bg-blue text-center">
                 <div class="container left-container">
                     <h2 class="left-welcome">Selamat Datang</h2>
-                    <img class="left-image" src="../img/login/undraw_programming_re_kg9v.svg">
+                    <img class="left-image" src="/img/login/undraw_programming_re_kg9v.svg">
                     <h6 class="left-appsname">SI SKS PENS 2022</h6>
                 </div>
             </div>
             <div class="col me-2">
                 <div class="container">
                     <h2 class="text-center mt-4 mb-3">Login</h2>
-                    
                     <!-- Session Status -->
                     <x-auth-session-status class="mb-4" :status="session('status')" />
 
