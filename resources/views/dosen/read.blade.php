@@ -31,6 +31,12 @@
                         </thead>
                         <tbody>
                             @foreach($user as $dosen)
+                              <?php
+                                $minusSKS = 0;
+                                foreach($mengajar->where('dosen_id', '=', $dosen->id) as $ajar){
+                                  $minusSKS += intval($ajar->mataKuliah()->sks);
+                                }
+                              ?>
                             <tr>
                               <td>{{$dosen['nip']}}</td>
                               <td>{{$dosen['nama']}}</td>
@@ -52,7 +58,7 @@
                                 Dosen
                                 @endif
                                 </td>
-                              <td>{{$dosen['CreditSKS']}}</td>
+                              <td>{{intval($dosen['CreditSKS']) - $minusSKS}}</td>
                                 {{-- kurang sks maks dari masing masing dosen --}}
                               <td>
                                 <a href="/dosen/update/bidangKeahlian/{{$dosen->id}}" style="background:none;border:none;outline:none;"><i class='bx bx-pencil tableAction'></i></a>

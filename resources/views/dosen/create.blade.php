@@ -4,12 +4,14 @@
     @include('sections.cardOpen')
     <form class="need-validation" method="POST" action="/dosen/create">@csrf
         <h5 class="card-title">Dosen - Create</h5>
-        {{$errors->first('nama')}}
+        @if(isset($errorMessage))
+        <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
+        @endif
         <div style="max-height: 60vh; overflow-y:auto;">
             <div class="card-text me-3">          
                 <div class="py-2">
                     <label for="inputNama">Nama</label>
-                    <input value="{{old('nama')}}" type="text" class="form-control @if ($errors->first('nama')) is-invalid @endif" id="inputNama" name="nama">
+                    <input value="{{old('nama')}}" type="text" class="form-control @error('nama') is-invalid @enderror" id="inputNama" name="nama">
                     @error('nama')
                     <div class="alert-danger mt-1 p-2">{{ $message }}</div>
                     @enderror

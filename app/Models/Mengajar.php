@@ -12,12 +12,17 @@ class Mengajar extends Model
         'id',
     ];
     public function dosen(){
-        return dosen::where('id', $this->dosen_id)->first();
+        return User::where('id', $this->dosen_id)->first();
     }
-    public function kelas(){
-        return kelas::where('id', $this->kelas_id)->first();
-    }
+
     public function mataKuliah(){
-        return mataKuliah::where('id', $this->mataKuliah_id)->first();
+        return MataKuliah::where('id', $this->mataKuliah_id)->first();
+    }
+    public function kelas($id){
+        return Kelas::where('id', $this->kelas_id)->first();
+    }
+    
+    public function paketKurikulum(){
+        return PaketKurikulum::where('id', $this->paketKurikulum_id)->first();
     }
 }

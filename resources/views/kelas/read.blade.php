@@ -12,6 +12,7 @@
             </div>
             <div class="col-6">
                 <div class="d-flex justify-content-end ">
+                    <a class="btn btn-primary me-3" href="/kelas/mengajar" role="button">Mengajar</a>
                     <a class="btn btn-primary" href="/kelas/create" role="button">Tambahkan Data</a>
                 </div>
             </div>

@@ -61,7 +61,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/paketKurikulum', 'read')->name('PaketKurikulumCreate');
         Route::post('/paketKurikulum', 'create');
         Route::post('/paketKurikulum/delete', 'delete');
-        
     });
 
     Route::controller(KurikulumController::class)->group(function () {
@@ -83,10 +82,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/kelas/create', 'showCreate')->name('KelasStoreView');
         Route::post('/kelas/create', 'saveCreate')->name('KelasStore');   
         Route::get('/kelas/update/{id}/', 'showUpdate')->name('KelasUpdateView');
-        Route::post('/kelas/update', 'saveUpdate')->name('KelasUpdate');  
+        Route::post('/kelas/update', 'saveUpdate')->name('KelasUpdate');          
+        Route::get('/kelas/delete/{id}/', 'deleteKelas');
     });
     Route::controller(MengajarController::class)->group(function () {
         Route::get('/kelas/mengajar', 'read')->name('mengajar'); 
+        Route::post('/kelas/mengajar', 'create');
+        Route::post('/kelas/mengajar/delete', 'delete');
     });
 });
 

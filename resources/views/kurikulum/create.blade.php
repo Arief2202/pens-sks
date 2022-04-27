@@ -4,6 +4,9 @@
     @include('sections.cardOpen')
     <form method="POST" action="/kurikulum/create">@csrf
         <h5 class="card-title">Kurikulum - Create</h5>
+        @if(isset($errorMessage))
+        <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
+        @endif
         <div style="max-height: 60vh; overflow-y:auto;">
             <div class="card-text me-3">
                 <div class="py-2">

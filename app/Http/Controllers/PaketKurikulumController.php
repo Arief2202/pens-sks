@@ -48,16 +48,37 @@ class PaketKurikulumController extends Controller
             'kurikulum' => ['required', 'string', 'max:255'],
             'idMataKuliah' => ['required', 'string', 'max:255']
         ]);
-
-        $paketKurikulum = PaketKurikulum::create([
-            'mataKuliah_id' => $request->idMataKuliah,
-            'kurikulum_id' => $request->kurikulum,
-            'tingkat' => $request->tingkat,
-            'prodi' => $request->prodi,
-            'semester' => $request->semester,
-        ]);
-        return redirect("/paketKurikulum?tingkat=$request->tingkat&prodi=$request->prodi&semester=$request->semester&kurikulum=$request->kurikulum");
+        $queryValid = PaketKurikulum::where('mataKuliah_id', '=', $request->idMataKuliah)
+                                    ->where('tingkat', '=', $request->tingkat)
+                                    ->where('prodi', '=', $request->prodi)
+                                    ->where('semester', '=', $request->semester)
+                                    ->where('kurikulum_id', '=', $request->kurikulum)->first();
+        if($queryValid){
+            $paketKurikulums = PaketKurikulum::where('tingkat', '=', $request->tingkat)
+                                        ->where('prodi', '=', $request->prodi)
+                                        ->where('semester', '=', $request->semester)
+                                        ->where('kurikulum_id', '=', $request->kurikulum)->get();
+            return view('paketKurikulum.read', [
+                'request' => $request,
+                'paketKurikulums' => $paketKurikulums,
+                'kurikulums' => Kurikulum::all(),
+                'mataKuliahs' => MataKuliah::all(),
+                'errorMessage' => 'Data sudah ada di database',
+            ]);
+        }
+        else{
+            $paketKurikulum = PaketKurikulum::create([
+                'mataKuliah_id' => $request->idMataKuliah,
+                'kurikulum_id' => $request->kurikulum,
+                'tingkat' => $request->tingkat,
+                'prodi' => $request->prodi,
+                'semester' => $request->semester,
+            ]);
+            return redirect("/paketKurikulum?tingkat=$request->tingkat&prodi=$request->prodi&semester=$request->semester&kurikulum=$request->kurikulum");    
+        }
+        
     }
+
     public function delete( Request $request){
         $paketKurikulum = PaketKurikulum::where('id', $request->id)->first();
         

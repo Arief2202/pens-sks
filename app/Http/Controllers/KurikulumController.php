@@ -39,16 +39,22 @@ class KurikulumController extends Controller
 
     public function saveCreate(Request $request)
     {
-        
         $request->validate([
             'namaKurikulum' => ['required', 'string', 'max:255'],
         ]);
+        $queryValid = Kurikulum::where('namaKurikulum', '=', $request->namaKurikulum)->first();
+        if($queryValid){
+            return view('kurikulum.create', [
+                'errorMessage' => 'Data sudah ada di database',
+            ]);
+        }
+        else{
+            $kurikulum = Kurikulum::create([
+                'namaKurikulum' => $request->namaKurikulum,
+            ]);
 
-        $kurikulum = Kurikulum::create([
-            'namaKurikulum' => $request->namaKurikulum,
-        ]);
-
-        return redirect("/kurikulum");
+            return redirect("/kurikulum");    
+        }
     }
 
     public function showUpdate($id, Request $request)
@@ -61,13 +67,23 @@ class KurikulumController extends Controller
 
     public function saveUpdate(Request $request)
     {
-        $queryKuri = Kurikulum::where('id', $request->idKurikulum)->first();
         $request->validate([
             'namaKurikulum' => ['required', 'string', 'max:255'],
         ]);
-        $queryKuri['namaKurikulum'] = $request->namaKurikulum;
-        $queryKuri->save();
-        return redirect("/kurikulum");
+        $queryKuri = Kurikulum::where('id', $request->idKurikulum)->first();
+        $queryValid = Kurikulum::where('namaKurikulum', '=', $request->namaKurikulum)->first();
+        if($queryValid){
+            $kuri = Kurikulum::where('id', $request->idKurikulum)->first();
+            return view('kurikulum.update', [
+                'kurikulum' => $kuri,
+                'errorMessage' => 'Data sudah ada di database',
+            ]);
+        }
+        else{
+            $queryKuri['namaKurikulum'] = $request->namaKurikulum;
+            $queryKuri->save();
+            return redirect("/kurikulum");
+        }
     }
 
     public function destroy(Kurikulum $kurikulum)

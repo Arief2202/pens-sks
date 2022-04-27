@@ -3,7 +3,10 @@
 @section('body')
     @include('sections.cardOpen')
     <form method="POST" action="/paketKurikulum/create">@csrf
-        <h5 class="card-title">Paket Praktikum - Create</h5>    
+        <h5 class="card-title">Paket Praktikum - Create</h5>
+        @if(isset($errorMessage))
+        <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
+        @endif   
         <div style="max-height: 60vh; overflow-y:auto;">
             <div class="card-text me-3">        
                 <div class="py-2">

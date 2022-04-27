@@ -25,6 +25,7 @@ class KelasController extends Controller
             'kurikulum' => $namaKurikulum,
         ]);
     }
+    // kalau namanya kan A,B tok, iki validate e piye
 
     public function saveCreate(Request $request)
     {
@@ -36,17 +37,30 @@ class KelasController extends Controller
             'semester' => ['required', 'string', 'max:255'],
             'startTahunAjaran' => ['required', 'string', 'max:255'],
         ]);
-
-        $paketKurikulum = Kelas::create([
-            'namaKelas' => $request->namaKelas,
-            'kurikulum_id' => $request->idKurikulum,
-            'tingkat' => $request->tingkat,
-            'prodi' => $request->prodi,
-            'semester' => $request->semester,
-            'startTahunAjaran' => $request->startTahunAjaran,
-        ]);
-
-        return redirect("/kelas");
+        $queryValid = Kelas::where('namaKelas', '=', $request->namaKelas)
+                            ->where('tingkat', '=', $request->tingkat)
+                            ->where('prodi', '=', $request->prodi)
+                            ->where('semester', '=', $request->semester)
+                            ->first();
+        if($queryValid){
+            $namaKurikulum = Kurikulum::all();
+            return view('kelas.create', [
+                'kurikulum' => $namaKurikulum,
+                'errorMessage' => 'Data sudah ada di database',
+            ]);
+        }
+        else{
+            $paketKurikulum = Kelas::create([
+                'namaKelas' => $request->namaKelas,
+                'kurikulum_id' => $request->idKurikulum,
+                'tingkat' => $request->tingkat,
+                'prodi' => $request->prodi,
+                'semester' => $request->semester,
+                'startTahunAjaran' => $request->startTahunAjaran,
+            ]);
+            return redirect("/kelas");
+        }
+        
     }
 
     public function showUpdate($id, Request $request)
@@ -61,7 +75,7 @@ class KelasController extends Controller
 
     public function saveUpdate(Request $request)
     {
-        $queryKelas = Kelas::where('id', $request->idKelas)->first();
+        
         $request->validate([
             'namaKelas' => ['required', 'string', 'max:255'],
             'idKurikulum' => ['required', 'int', 'max:20'],
@@ -70,13 +84,39 @@ class KelasController extends Controller
             'semester' => ['required', 'string', 'max:255'],
             'startTahunAjaran' => ['required', 'string', 'max:255'],
         ]);
-        $queryKelas['namaKelas'] = $request->namaKelas;
-        $queryKelas['kurikulum_id'] = $request->idKurikulum;
-        $queryKelas['tingkat'] = $request->tingkat;
-        $queryKelas['prodi'] = $request->prodi;
-        $queryKelas['semester'] = $request->semester;
-        $queryKelas['startTahunAjaran'] = $request->startTahunAjaran;
-        $queryKelas->save();
+        $queryKelas = Kelas::where('id', $request->idKelas)->first();
+        $queryValid = Kelas::where('namaKelas', '=', $request->namaKelas)
+                            ->where('tingkat', '=', $request->tingkat)
+                            ->where('prodi', '=', $request->prodi)
+                            ->where('semester', '=', $request->semester)
+                            ->where('id', '!=', $request->idKelas)
+                            ->first();
+        if($queryValid){
+            $kls = Kelas::where('id', $request->idKelas)->first();
+            $kuri = Kurikulum::all();
+            return view('kelas.update', [
+                'kelas' => $kls,
+                'kurikulum' => $kuri,
+                'errorMessage' => 'Data sudah ada di database',
+            ]);
+        }
+        else{
+            $queryKelas['namaKelas'] = $request->namaKelas;
+            $queryKelas['kurikulum_id'] = $request->idKurikulum;
+            $queryKelas['tingkat'] = $request->tingkat;
+            $queryKelas['prodi'] = $request->prodi;
+            $queryKelas['semester'] = $request->semester;
+            $queryKelas['startTahunAjaran'] = $request->startTahunAjaran;
+            $queryKelas->save();
+            return redirect("/kelas");    
+        }
+        
+    }
+
+    
+    public function deleteKelas($id, Request $request){
+        $kelas = Kelas::where('id', $id)->first();
+        $kelas->delete();
         return redirect("/kelas");
     }
 }

@@ -32,5 +32,7 @@
     <script type="text/javascript" src="http://{{$_SERVER['HTTP_HOST']}}/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="http://{{$_SERVER['HTTP_HOST']}}/js/sidebar/script.js"></script>
     <script src="http://{{$_SERVER['HTTP_HOST']}}/boxicons/boxicons.js"></script>
+      
+    
     @yield('script')
 </body>

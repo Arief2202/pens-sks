@@ -51,12 +51,12 @@ class MataKuliahController extends Controller
      */
     public function saveCreate(Request $request)
     { 
-        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
         $request->validate([
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
             'sks' => ['required', 'integer','gt:1', 'max:11'],
         ]);
+        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
         if($queryValid){
             $namaBidangKeahlian = BidangKeahlian::all();
             return view('mataKuliah.create', [
@@ -87,13 +87,13 @@ class MataKuliahController extends Controller
 
     public function saveUpdate(Request $request)
     {
-        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
-        $queryMatkul = MataKuliah::where('id', $request->idMataKuliah)->first();
         $request->validate([
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
             'sks' => ['required', 'integer', 'gt:1', 'max:11'],
         ]);
+        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
+        $queryMatkul = MataKuliah::where('id', $request->idMataKuliah)->first();
         if($queryValid){
             $matkul = MataKuliah::where('id', $request->idMataKuliah)->first();
             $bidkah = BidangKeahlian::all();

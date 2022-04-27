@@ -4,6 +4,9 @@
         @include('sections.cardOpen')
         <form method="POST" action="/mataKuliah/create">@csrf
         <h5 class="card-title">Mata Kuliah - Create</h5>
+        @if(isset($errorMessage))
+        <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
+        @endif
         <div style="max-height: 60vh; overflow-y:auto;">
             <div class="card-text me-3">            
                 <div class="py-2">
@@ -12,14 +15,16 @@
                     @error('namaMataKuliah')
                     <div class="alert-danger mt-1 p-2">{{ $message }}</div>
                     @enderror
+                    
                 </div>
-                <div class="py-2">
-                    <h6>Bidang Keahlian</h6>
-                    <select value="{{old('idBidangKeahlian')}}" name="idBidangKeahlian" class="form-select @if ($errors->first('idBidangKeahlian')) is-invalid @endif" aria-label="Default select example">
-                        <option selected hidden> </option>                        
-                            @foreach($bidangKeahlian as $bidkah){
-                                <option value="{{$bidkah['id']}}">{{$bidkah['namaBidangKeahlian']}}</option>
-                            @endforeach
+            </div>
+            <div class="py-2">
+                <h6>Bidang Keahlian</h6>
+                <select name="idBidangKeahlian" class="form-select @if ($errors->first('idBidangKeahlian')) is-invalid @endif" aria-label="Default select example">
+                    <option selected hidden> </option>                        
+                        @foreach($bidangKeahlian as $bidkah){
+                            <option @if(old('idBidangKeahlian') == $bidkah->id) selected @endif value="{{$bidkah['id']}}">{{$bidkah['namaBidangKeahlian']}}</option>
+                        @endforeach
                     </select>
                     @error('idBidangKeahlian')
                     <div class="alert-danger mt-1 p-2">{{ $message }}</div>
@@ -27,7 +32,7 @@
                 </div>
                 <div class="py-2">
                     <label for="sks">SKS</label>
-                    <input type="number" class="form-control @if ($errors->first('sks')) is-invalid @endif" id="sks" name="sks">
+                    <input value="{{old('sks')}}" type="number" class="form-control @if ($errors->first('sks')) is-invalid @endif" id="sks" name="sks">
                     @error('sks')
                     <div class="alert-danger mt-1 p-2">{{ $message }}</div>
                     @enderror

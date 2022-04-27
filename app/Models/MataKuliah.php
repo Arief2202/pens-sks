@@ -15,4 +15,7 @@ class MataKuliah extends Model
     public function bidangKeahlian(){
         return BidangKeahlian::where('id', $this->bidangKeahlian_id)->first();
     }
+    public function mataKuliah(){
+        return MataKuliah::where('id', $this->mataKuliah_id)->first();
+    }
 }

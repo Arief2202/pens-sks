@@ -48,11 +48,19 @@
                     </div>                             
                 </div>
             </div>
-                
-            <div class="float-end mt-4 mb-3 me-1">
-                <a class="btn btn-outline-danger" href="/kelas">Cancel</a>
-                <button class="btn btn-success" type="submit">Update</button>
-            </div>   
+            <div class="row">
+                <div class="col">
+                    <div class="float-start mt-4 me-1">
+                        <a class="btn btn-warning" href="/kelas/delete/{{$kelas->id}}">Delete</a>
+                    </div>                                 
+                </div>
+                <div class="col">
+                    <div class="float-end mt-4 me-1">
+                        <a class="btn btn-secondary" href="/kelas">Cancel</a>
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>                       
+                </div>
+            </div>
         </form>
     @include('sections.cardClose')
 @endsection

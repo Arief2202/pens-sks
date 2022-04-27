@@ -6,12 +6,12 @@ use App\Http\Requests\StoreBidangKeahlianRequest;
 use App\Http\Requests\UpdateBidangKeahlianRequest;
 use App\Models\BidangKeahlian;
 use Illuminate\Http\Request;
-
+//Hello
 class BidangKeahlianController extends Controller
 {
-    /**
+    /**    
      * Display a listing of the resource.
-     *
+     *  
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -45,11 +45,12 @@ class BidangKeahlianController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function saveCreate(Request $request)
-    {
-        $queryBidkah = BidangKeahlian::where('namaBidangKeahlian', '=', $request->namaBidangKeahlian)->first();
+    { 
         $request->validate([
-                'namaBidangKeahlian' => ['required', 'string', 'max:255'],
-            ]);
+            'namaBidangKeahlian' => ['required', 'string', 'max:255'],
+        ]);
+        $queryBidkah = BidangKeahlian::where('namaBidangKeahlian', '=', $request->namaBidangKeahlian)->first();
+       
         if($queryBidkah){
             return view('bidangKeahlian.create', [
                 'errorMessage' => 'Data sudah ada di database',

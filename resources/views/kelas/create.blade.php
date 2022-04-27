@@ -4,21 +4,11 @@
     @include('sections.cardOpen')
         <form method="POST" action="/kelas/create">@csrf
             <h5 class="card-title">Kelas - Create</h5>
+            @if(isset($errorMessage))
+            <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
+            @endif
             <div style="max-height: 60vh; overflow-y:auto;">
                 <div class="card-text me-3">
-                    <div class="py-2">
-                        <h6>Nama Kelas</h6>
-                            <input type="text" class="form-control" name="namaKelas">
-                    </div>
-                    <div class="py-2">
-                        <h6>Kurikulum</h6>
-                            <select name="idKurikulum" class="form-select" aria-label="Default select example">
-                                <option selected hidden> </option>                        
-                                    @foreach($kurikulum as $kuri){
-                                        <option value="{{$kuri['id']}}">{{$kuri['namaKurikulum']}}</option>
-                                    @endforeach
-                            </select>     
-                    </div>
                     <div class="py-2">
                         <h6>Tingkat</h6>
                             <select name="tingkat" class="form-select" aria-label="Default select example">
@@ -38,11 +28,24 @@
                             </select>     
                     </div>
                     <div class="py-2">
+                        <h6>Nama Kelas</h6>
+                            <input type="text" class="form-control" name="namaKelas">
+                    </div>
+                    <div class="py-2">
                         <h6>Semester</h6>
                             <select name="semester" class="form-select" aria-label="Default select example">
                                 <option selected hidden> </option>                        
                                     <option value="Ganjil">Ganjil</option>
                                     <option value="Genap">Genap</option>
+                            </select>     
+                    </div>
+                    <div class="py-2">
+                        <h6>Kurikulum</h6>
+                            <select name="idKurikulum" class="form-select" aria-label="Default select example">
+                                <option selected hidden> </option>                        
+                                    @foreach($kurikulum as $kuri){
+                                        <option value="{{$kuri['id']}}">{{$kuri['namaKurikulum']}}</option>
+                                    @endforeach
                             </select>     
                     </div>
                     <div class="py-2 sks">
