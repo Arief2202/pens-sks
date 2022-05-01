@@ -24,16 +24,7 @@
             </div>
             <div class="col-6">
                 <div class="row d-flex justify-content-end">
-                    <div class="col-md-5">    
-                        <a href="/mataKuliah" class="btn btn-success d-flex align-items-center">
-                            <i class='bx bx-book' style="font-size: 20px;"></i>&nbsp;Mata Kuliah
-                        </a> 
-                    </div>
-                    <div class="col-md-4">    
-                        <a href="/kurikulum" class="btn btn-success d-flex align-items-center">
-                            <i class='bx bx-bookmark-alt-minus' style="font-size: 20px;"></i>&nbsp;Kurikulum
-                        </a> 
-                    </div>
+                    
                 </div>
             </div>
             <form action="/paketKurikulum" method="GET">

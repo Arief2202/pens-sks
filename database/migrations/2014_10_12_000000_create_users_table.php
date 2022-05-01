@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('alias')->nullable();
             $table->string('email')->unique();
             $table->string('password')->default('$2y$10$JUUKFmyB9pWCIAcTjC12QOT5XdV7t8peTA3.zbNvaUUj.pwGwBVq.');
-            $table->integer('CreditSKS')->default('23');
+            $table->integer('bebanMengajar')->default('0');
             $table->integer('role')->default('2');
             $table->integer('darkMode')->default('0');
             $table->integer('openSideBar')->default('1');

@@ -1,119 +1,118 @@
-<nav class="sidebar {{Auth::user()->openSideBar == '0' ? 'close' : ''}}">
-    <header>
-        <div class="image-text">
-            <span class="image">
-            <img class="fotoProfil" alt="Foto Profil">
-            {{-- <img src="http://sks-pens.site/img/sidebar/{{Auth::user()->darkMode == '1' ? 'dark.png' : 'light.png'}}" alt=""> --}}
-        </span>
-
-            <div class="text logo-text">
-                <span class="name">{{ Auth::user()->alias }}</span>
-                <span class="profession">
-                    {{Auth::user()->role == 1 ? 'Kaprodi' : ''}}
-                    {{Auth::user()->role == 2 ? 'Dosen' : ''}}
-                    {{Auth::user()->role != 1 && Auth::user()->role != 2 ? 'Unknown' : ''}}
-                </span>
-            </div>
-        </div>
-
+<div class="sidebar {{Auth::user()->openSideBar == '0' ? 'close' : ''}}">
+    <div class="openclose-button">
         <i class='bx bx-chevron-right toggle'></i>
-    </header>
+    </div>
 
-    <div class="menu-bar">
-        <div class="menu">
-            {{-- <li class="search-box">
-                <i class='bx bx-search icon'></i>
-                <input type="text" placeholder="Search...">
-            </li> --}}
-            <ul class="menu-links">
-                <li class="nav-link {{Request::segment(1) == 'dashboard'? 'active' : ''}}" >
-                    <a href="/dashboard">
-                        <i class='bx bx-chart icon'></i>
-                        <span class="text nav-text">Dashboard</span>
-                    </a>
-                </li>
+    <ul class="nav-links"> 
+        
+        {{-- ============== TOP SIDE BAR ============= --}}     
+        <li>
+        <div class="profile-details">
+            <div class="profile-content">
+                <img class="fotoProfil" alt="Foto Profil">
+            </div>
+            <div class="name-job">
+            <div class="profile_name">{{ Auth::user()->alias }}</div>
+            <div class="job">
+                {{Auth::user()->role == 1 ? 'Kaprodi' : ''}}
+                {{Auth::user()->role == 2 ? 'Dosen' : ''}}
+                {{Auth::user()->role != 1 && Auth::user()->role != 2 ? 'Unknown' : ''}}
+            </div>
+            </div>
+        </div>        
+        </li>
 
-                <li class="nav-link {{Request::segment(1) == 'dosen'? 'active' : ''}}">
-                    <a href="/dosen">
-                        <i class='bx bx-user icon'></i>
-                        <span class="text nav-text">Dosen</span>
-                    </a>
-                </li>
+        {{-- ============== MID (KOMPONEN) SIDE BAR ============= --}} 
 
-                <li class="nav-link {{Request::segment(1) == 'bidangKeahlian'? 'active' : ''}}">
-                    <a href="/bidangKeahlian">
-                        <i class='bx icon bx-briefcase'></i>
-                        <span class="text nav-text">Bidang Keahlian</span>
-                    </a>
-                </li>
+        
+        {{-- ============== Contoh Dropdown ============= --}} 
 
-                {{-- <li class="nav-link {{Request::segment(1) == 'mataKuliah'? 'active' : ''}}">
-                    <a href="/mataKuliah">
-                        <i class='bx bx-book icon'></i>
-                        <span class="text nav-text">Mata Kuliah</span>
-                    </a>
-                </li> --}}
-
-                {{-- <li class="nav-link {{Request::segment(1) == 'kurikulum'? 'active' : ''}}">
-                    <a href="/kurikulum">
-                        <i class='bx bx-bookmark-alt-minus icon'></i>
-                        <span class="text nav-text">Nama Kurikulum</span>
-                    </a>
-                </li> --}}
-
-                <li class="nav-link {{Request::segment(1) == 'paketKurikulum'? 'active' : ''}}">
-                    <a href="/paketKurikulum">
-                        <i class='bx bx-package icon'></i>
-                        <span class="text nav-text">Paket Kurikulum</span>
-                    </a>
-                </li>
-
-                <li class="nav-link {{Request::segment(1) == 'kelas'? 'active' : ''}}">
-                    <a href="/kelas">
-                        <i class='bx bx-door-open icon'></i>
-                        <span class="text nav-text">Kelas</span>
-                    </a>
-                </li>
-
-                {{-- <li class="nav-link">
-                    <a href="#">
-                        <i class='bx bx-wallet icon'></i>
-                        <span class="text nav-text">Wallets</span>
-                    </a>
-                </li> --}}
-
+        
+        {{-- <li>
+            <div class="iocn-link">
+                <a href="/dosen">
+                    <i class='bx bx-collection'></i>
+                    <span class="link_name">Dosen</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow' ></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name">Dosen</a></li>
+                <li><a href="/dosen">Profile Dosen</a></li>
+                <li><a href="/dosen/profile">Beban Dosen</a></li>
             </ul>
-        </div>
+        </li> --}}
 
-        <div class="bottom-content">
-            <li class="">                        
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+        {{-- ============== Contoh Standart ============= --}} 
 
-                    <x-responsive-nav-link :href="route('logout')"
+        
+        {{-- <li>
+            <a href="/">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/">Dashboard</a></li>
+            </ul>
+        </li> --}}
+
+        
+        {{-- ============== Active Component Sidebar ============= --}} 
+        
+
+        <li class="{{Request::segment(1) == 'dashboard'? 'active' : ''}}">
+            <a href="/">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/">Dashboard</a></li>
+            </ul>
+        </li>
+        
+        <li class="{{Request::segment(1) == 'dosen'? 'active' : ''}}">
+            <div class="iocn-link">
+                <a href="/dosen">
+                    <i class='bx bx-collection'></i>
+                    <span class="link_name">Dosen</span>
+                </a>
+                <i class='bx bxs-chevron-down arrow' ></i>
+            </div>
+            <ul class="sub-menu">
+                <li><a class="link_name">Dosen</a></li>
+                <li><a href="/dosen">Profile Dosen</a></li>
+                <li><a href="/dosen/profile">Beban Dosen</a></li>
+            </ul>
+        </li>
+
+        {{-- ============== LOGOUT DAN BOTTOM SIDE BAR ================ --}}
+        <li>        
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        
-                        <i class='bx bx-log-out icon'></i>
-                        <span class="text nav-text">Logout</span>
-                    </x-responsive-nav-link>
-                    
-                </form>
-            
-            </li>
-
-            <li class="mode">
-                <div class="sun-moon">
-                    <i class='bx bx-moon icon moon'></i>
-                </div>
-                <span class="mode-text text">Dark mode</span>
-
+                                        this.closest('form').submit();"
+                                        class="logout-footer">
+                <i class='bx bx-log-out icon'></i>
+                <span class="link_name">Logout</span>
+                <ul class="sub-menu logout-button">
+                    Logout
+                </ul>
+                </x-responsive-nav-link>
+            </form>   
+        </li>
+        <li>
+            <div class="sidebar-footer">
+                <span class='bx bx-moon moon'></span>
+                <span class="link_name">Dark mode</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Dark Mode</a></li>
+                </ul>
                 <div class="toggle-switch">
                     <span class="switch"></span>
                 </div>
-            </li>
-
-        </div>
-    </div>
-
-</nav>
+            </div>        
+        </li>
+        {{-- ============== END LOGOUT DAN BOTTOM SIDE BAR ============== --}}
+    </ul>
+</div>

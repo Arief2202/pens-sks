@@ -31,6 +31,13 @@
                     @enderror                        
                 </div>
                 <div class="py-2">
+                    <label for="jam">Jam</label>
+                    <input value="{{old('jam')}}" type="number" class="form-control @if ($errors->first('jam')) is-invalid @endif" id="jam" name="jam">
+                    @error('jam')
+                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="py-2">
                     <label for="sks">SKS</label>
                     <input value="{{old('sks')}}" type="number" class="form-control @if ($errors->first('sks')) is-invalid @endif" id="sks" name="sks">
                     @error('sks')

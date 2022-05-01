@@ -27,6 +27,8 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/sidebar2', function () {return view('sidebar2.index');});
+
     Route::get('/dashboard', function () {return view('dashboard.read');})->name('dashboard');
 
     Route::controller(BidangKeahlianController::class)->group(function () {

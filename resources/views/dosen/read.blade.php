@@ -23,9 +23,9 @@
                           <tr>
                             <th class="th" scope="col">NIP</th>
                             <th class="th" scope="col">Nama Dosen</th>
-                            <th class="th" scope="col">Keahlian</th>
-                            <th class="th" scope="col">Jabatan</th>
-                            <th class="th" scope="col">Credit SKS</th>
+                            {{-- <th class="th" scope="col">Keahlian</th> --}}
+                            {{-- <th class="th" scope="col">Jabatan</th> --}}
+                            <th class="th" scope="col">Pembebanan Jam</th>
                             <th class="th" scope="col">Edit</th>
                           </tr>
                         </thead>
@@ -41,7 +41,7 @@
                               <td>{{$dosen['nip']}}</td>
                               <td>{{$dosen['nama']}}</td>
 
-                              <td>
+                              {{-- <td>
                                 <?php $totalLoop = 0;?>
                                 @foreach($daftarbidkah as $bidkah)
                                   @if($bidkah->dosen_id == $dosen->id)
@@ -49,15 +49,15 @@
                                     {{$bidkah->bidangKeahlian()->namaBidangKeahlian}}
                                   @endif
                                 @endforeach
-                              </td>
+                              </td> --}}
 
-                              <td>
+                              {{-- <td>
                                 @if($dosen->role == 1)
                                 Kaprodi
                                 @elseif($dosen->role == 2)
                                 Dosen
                                 @endif
-                                </td>
+                                </td> --}}
                               <td>{{intval($dosen['CreditSKS']) - $minusSKS}}</td>
                                 {{-- kurang sks maks dari masing masing dosen --}}
                               <td>

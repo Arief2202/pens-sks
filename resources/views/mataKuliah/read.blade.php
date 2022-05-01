@@ -23,6 +23,7 @@
                           <tr>
                             <th class="th" scope="col">Nama Mata Kuliah</th>
                             <th class="th" scope="col">Bidang Keahlian</th>
+                            <th class="th" scope="col">Jam</th>
                             <th class="th" scope="col">SKS</th>
                             <th class="th" scope="col">Edit</th>
                           </tr>
@@ -38,6 +39,7 @@
                               {{-- @endif
                               @endforeach --}}
                               </td>
+                              <td>{{$mk['jam']}}</td>
                               <td>{{$mk['sks']}}</td>
                               <td>
                                   <a href="/mataKuliah/update/{{$mk->id}}"><i class='bx bx-pencil tableAction'></i></a>

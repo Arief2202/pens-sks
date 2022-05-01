@@ -17,6 +17,7 @@ class CreateMataKuliahsTable extends Migration
             $table->id();
             $table->foreignId('bidangKeahlian_id');
             $table->string('namaMataKuliah');
+            $table->integer('jam');
             $table->integer('sks');
             $table->timestamps();
         });

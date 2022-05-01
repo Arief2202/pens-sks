@@ -55,6 +55,7 @@ class MataKuliahController extends Controller
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
             'sks' => ['required', 'integer','gt:1', 'max:11'],
+            'jam' => ['required', 'integer','gt:0', 'max:11'],
         ]);
         $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
         if($queryValid){
@@ -69,6 +70,7 @@ class MataKuliahController extends Controller
                 'bidangKeahlian_id' => $request->idBidangKeahlian,
                 'namaMataKuliah' => $request->namaMataKuliah,
                 'sks' => $request->sks,
+                'jam' => $request->jam,
             ]);
             return redirect("/mataKuliah");
         }
@@ -91,8 +93,10 @@ class MataKuliahController extends Controller
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
             'sks' => ['required', 'integer', 'gt:1', 'max:11'],
+            'jam' => ['required', 'integer', 'gt:0', 'max:11'],
         ]);
-        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
+        $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)
+                                ->where('id', '!=', $request->idBidangKeahlian)->first();
         $queryMatkul = MataKuliah::where('id', $request->idMataKuliah)->first();
         if($queryValid){
             $matkul = MataKuliah::where('id', $request->idMataKuliah)->first();
@@ -107,6 +111,7 @@ class MataKuliahController extends Controller
             $queryMatkul['bidangKeahlian_id'] = $request->idBidangKeahlian;
             $queryMatkul['namaMataKuliah'] = $request->namaMataKuliah;
             $queryMatkul['sks'] = $request->sks;
+            $queryMatkul['jam'] = $request->jam;
             $queryMatkul->save();
             return redirect("/mataKuliah");
         }
