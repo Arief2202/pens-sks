@@ -1,18 +1,16 @@
 <?php
 
 namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
+use App\Models\Kurikulum;
 
 class KurikulumSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        //
+        Kurikulum::insert([
+            ['namaKurikulum' => '2019'],
+            ['namaKurikulum' => '2022'],
+        ]);
     }
 }

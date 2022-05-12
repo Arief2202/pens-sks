@@ -1,0 +1,29 @@
+.deleteDosen{
+    height: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.deleteDosenName{
+    position: relative;
+    height: 25px;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.deleteDosenImg{
+    position: relative;
+    top:-25px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+.deleteDosen:hover .deleteDosenName{
+    opacity: 0;
+    visibility: hidden;
+}
+.deleteDosen:hover .deleteDosenImg{
+    opacity: 1;
+    visibility: visible;
+}

@@ -22,25 +22,21 @@
                         <thead class="thead">
                           <tr>
                             <th class="th" scope="col">Nama Mata Kuliah</th>
-                            <th class="th" scope="col">Bidang Keahlian</th>
-                            <th class="th" scope="col">Jam</th>
                             <th class="th" scope="col">SKS</th>
-                            <th class="th" scope="col">Edit</th>
+                            <th class="th" scope="col">Jam</th>
+                            <th class="th" scope="col">Bidang Keahlian</th>
+                            <th class="th" scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($mataKuliah as $mk)
                             <tr>
                               <td>{{$mk['namaMataKuliah']}}</td>
-                              <td>
-                              {{-- @foreach($bidangKeahlian as $bk)
-                              @if($bk->id == $mk->idBidangKeahlian) --}}
-                              {{$mk->bidangKeahlian()->namaBidangKeahlian}}
-                              {{-- @endif
-                              @endforeach --}}
-                              </td>
-                              <td>{{$mk['jam']}}</td>
                               <td>{{$mk['sks']}}</td>
+                              <td>{{$mk['jam']}}</td>
+                              <td>
+                                {{$mk->bidangKeahlian()->namaBidangKeahlian}}
+                              </td>
                               <td>
                                   <a href="/mataKuliah/update/{{$mk->id}}"><i class='bx bx-pencil tableAction'></i></a>
                               </td>

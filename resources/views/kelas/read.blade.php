@@ -12,7 +12,7 @@
             </div>
             <div class="col-6">
                 <div class="d-flex justify-content-end ">
-                    <a class="btn btn-primary me-3" href="/kelas/mengajar" role="button">Mengajar</a>
+                    {{-- <a class="btn btn-primary me-3" href="/kelas/mengajar" role="button">Mengajar</a> --}}
                     <a class="btn btn-primary" href="/kelas/create" role="button">Tambahkan Data</a>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             <th class="th" scope="col">Semester</th>
                             <th class="th" scope="col">Kurikulum</th>
                             <th class="th" scope="col">Tahun Ajaran</th>
-                            <th class="th" scope="col">Edit</th>
+                            <th class="th" scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>

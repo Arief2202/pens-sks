@@ -56,8 +56,8 @@
                 </div>
                 <div class="col">
                     <div class="float-end mt-4 me-1">
-                        <a class="btn btn-secondary" href="/kelas">Cancel</a>
-                        <button class="btn btn-success" type="submit">Update</button>
+                        <a class="btn btn-outline-secondary" href="/kelas">Cancel</a>
+                        <button class="btn btn-primary" type="submit">Update</button>
                     </div>                       
                 </div>
             </div>

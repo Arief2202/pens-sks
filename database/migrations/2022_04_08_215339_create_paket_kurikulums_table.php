@@ -15,10 +15,9 @@ class CreatePaketKurikulumsTable extends Migration
     {
         Schema::create('paket_kurikulums', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kurikulum_id');
-            $table->string('tingkat');  
             $table->string('prodi');  
             $table->string('semester');   
+            $table->foreignId('kurikulum_id');
             $table->foreignId('mataKuliah_id');        
             $table->timestamps();
         });

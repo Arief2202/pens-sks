@@ -13,7 +13,7 @@
             </div>
         </div>
         <h5>{{$dosen->nama}} ({{$dosen->nip}})</h5>
-        <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambahkan Bidang Keahlian
         </button>
 
@@ -23,7 +23,7 @@
                     <thead class="thead">
                         <tr>
                             <th class="th" scope="col">Nama Bidang Keahlian</th>
-                            <th class="th" scope="col">Edit</th>
+                            <th class="th" scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -63,8 +63,8 @@
                         </select>        
                     </div>
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Tambahkan</button>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
               </div>

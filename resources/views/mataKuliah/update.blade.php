@@ -27,11 +27,24 @@
                     <label for="sks">SKS</label>
                     <input type="number" class="form-control" id="sks" name="sks" value = "{{$mataKuliah->sks}}">
                 </div>
+                <div class="py-2">
+                    <label for="sks">Jam</label>
+                    <input type="number" class="form-control" id="jam" name="jam" value = "{{$mataKuliah->jam}}">
+                </div>
             </div>
         </div>
-        <div class="float-end mt-4 mb-3 me-3">
-            <a class="btn btn-outline-danger" href="/mataKuliah">Cancel</a>
-            <button class="btn btn-success" type="submit">Update</button>
+        <div class="row">
+            <div class="col">
+                <div class="mt-4 me-3">
+                    <a class="btn btn-warning" href="/mataKuliah/delete/{{Request::segment(3)}}">Delete</a>
+                </div>                
+            </div>
+            <div class="col">
+                <div class="float-end mt-4 me-3">
+                    <a class="btn btn-outline-danger" href="/mataKuliah">Cancel</a>
+                    <button class="btn btn-success" type="submit">Update</button>
+                </div>
+            </div>
         </div>
         </form>
         @include('sections.cardClose')

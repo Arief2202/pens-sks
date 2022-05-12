@@ -6,6 +6,7 @@ use App\Http\Requests\StoreKurikulumRequest;
 use App\Http\Requests\UpdateKurikulumRequest;
 use App\Models\Kurikulum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KurikulumController extends Controller
 {
@@ -14,10 +15,6 @@ class KurikulumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,6 +23,10 @@ class KurikulumController extends Controller
      */
     public function read()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $viewKurikulum = Kurikulum::all();
         return view('kurikulum.read', [
             'kurikulums' => $viewKurikulum,
@@ -34,11 +35,19 @@ class KurikulumController extends Controller
 
     public function showCreate()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         return view('kurikulum.create');
     }
 
     public function saveCreate(Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $request->validate([
             'namaKurikulum' => ['required', 'string', 'max:255'],
         ]);
@@ -59,6 +68,10 @@ class KurikulumController extends Controller
 
     public function showUpdate($id, Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $kuri = Kurikulum::where('id', $id)->first();
         return view('kurikulum.update', [
             'kurikulum' => $kuri,
@@ -67,6 +80,10 @@ class KurikulumController extends Controller
 
     public function saveUpdate(Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $request->validate([
             'namaKurikulum' => ['required', 'string', 'max:255'],
         ]);
@@ -88,6 +105,8 @@ class KurikulumController extends Controller
 
     public function destroy(Kurikulum $kurikulum)
     {
-        //
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
     }
 }

@@ -17,18 +17,12 @@
                     @enderror
                     
                 </div>
-            </div>
-            <div class="py-2">
-                <h6>Bidang Keahlian</h6>
-                <select name="idBidangKeahlian" class="form-select @if ($errors->first('idBidangKeahlian')) is-invalid @endif" aria-label="Default select example">
-                    <option selected hidden> </option>                        
-                        @foreach($bidangKeahlian as $bidkah){
-                            <option @if(old('idBidangKeahlian') == $bidkah->id) selected @endif value="{{$bidkah['id']}}">{{$bidkah['namaBidangKeahlian']}}</option>
-                        @endforeach
-                    </select>
-                    @error('idBidangKeahlian')
+                <div class="py-2">
+                    <label for="sks">SKS</label>
+                    <input value="{{old('sks')}}" type="number" class="form-control @if ($errors->first('sks')) is-invalid @endif" id="sks" name="sks">
+                    @error('sks')
                     <div class="alert-danger mt-1 p-2">{{ $message }}</div>
-                    @enderror                        
+                    @enderror
                 </div>
                 <div class="py-2">
                     <label for="jam">Jam</label>
@@ -38,11 +32,16 @@
                     @enderror
                 </div>
                 <div class="py-2">
-                    <label for="sks">SKS</label>
-                    <input value="{{old('sks')}}" type="number" class="form-control @if ($errors->first('sks')) is-invalid @endif" id="sks" name="sks">
-                    @error('sks')
+                    <label for="idBidangKeahlian">Bidang Keahlian</label>
+                    <select name="idBidangKeahlian" class="form-select @if ($errors->first('idBidangKeahlian')) is-invalid @endif" aria-label="Default select example">
+                        <option selected hidden> </option>                        
+                            @foreach($bidangKeahlian as $bidkah){
+                                <option @if(old('idBidangKeahlian') == $bidkah->id) selected @endif value="{{$bidkah['id']}}">{{$bidkah['namaBidangKeahlian']}}</option>
+                            @endforeach
+                    </select>
+                    @error('idBidangKeahlian')
                     <div class="alert-danger mt-1 p-2">{{ $message }}</div>
-                    @enderror
+                    @enderror                        
                 </div>
             </div>
         </div>

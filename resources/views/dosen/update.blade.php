@@ -39,8 +39,8 @@
                         <input type="password" class="form-control" id="inputEmail" name="password"  value="{{$dosen->password}}">
                     </div>
                     <div class="py-2">
-                        <label for="inputEmail">SKS</label>
-                        <input type="number" class="form-control" id="inputEmail" name="sks"  value="{{$dosen->CreditSKS}}">
+                        <label for="inputEmail">Beban Mengajar</label>
+                        <input type="number" class="form-control" id="inputEmail" name="bebanMengajar"  value="{{$dosen->bebanMengajar}}">
                     </div>
                     <div class="py-2">
                         <label for="inputEmail">Role</label>
@@ -54,12 +54,12 @@
             </div>
             <div class="row">
                 <div class="col-6 mt-4">
-                    <a href="/dosen/delete/{{$dosen->id}}" class="btn btn-warning">Hapus Dosen</a>
+                    <a href="/dosen/delete/{{$dosen->id}}" class="btn btn-warning">Delete</a>
                 </div>
                 <div class="col-6">
                     <div class="float-end mt-4 me-3">
                         <a class="btn btn-outline-secondary me-2" href="/dosen">Cancel</a>
-                        <button class="btn btn-success" type="submit">Save</button>
+                        <button class="btn btn-primary" type="submit">Update</button>
                     </div>                    
                 </div>
             </div>

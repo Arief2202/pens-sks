@@ -15,12 +15,9 @@ class CreateKelasTable extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();   
-            $table->string('tingkat');  
             $table->string('prodi');  
             $table->string('semester');     
-            $table->string('namaKelas');    
             $table->foreignId('kurikulum_id');
-            $table->date('startTahunAjaran');  
             $table->timestamps();
         });
     }

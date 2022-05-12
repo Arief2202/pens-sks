@@ -59,6 +59,7 @@
         
         {{-- ============== Active Component Sidebar ============= --}} 
         
+
         <li class="{{Request::segment(1) == 'dashboard'? 'active' : ''}}">
             <a href="/">
                 <i class='bx bx-chart icon'></i>
@@ -69,7 +70,6 @@
             </ul>
         </li>
         
-        @if(Auth::user()->role == 1)
         <li class="{{Request::segment(1) == 'dosen'? 'active' : ''}}">
             <div class="iocn-link">
                 <a href="/dosen">
@@ -84,58 +84,8 @@
                 <li><a href="/dosen/profile">Beban Dosen</a></li>
             </ul>
         </li>
-        @endif
 
-        @if(Auth::user()->role == 1)
-        <li class="{{Request::segment(1) == 'paketKurikulum'? 'active' : ''}}">
-            <div class="iocn-link">
-                <a href="/paketKurikulum">
-                    <i class='bx bx-bookmark-alt-minus icon'></i>
-                    <span class="link_name">Kurikulum</span>
-                </a>
-                <i class='bx bxs-chevron-down arrow' ></i>
-            </div>
-            <ul class="sub-menu">
-                <li><a class="link_name">Kurikulum</a></li>
-                <li><a href="/paketKurikulum">Paket Kurikulum</a></li>
-                <li><a href="/kurikulum">Nama Kurikulum</a></li>
-            </ul>
-        </li>
-        @endif
-
-        @if(Auth::user()->role == 1)
-        <li class="{{Request::segment(1) == 'bidangKeahlian'? 'active' : ''}}">
-            <a href="/bidangKeahlian">
-                <i class='bx bx-briefcase icon'></i>
-                <span class="link_name">Bidang Keahlian</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="/bidangKeahlian">Bidang Keahlian</a></li>
-            </ul>
-        </li>
-        @endif
-
-        @if(Auth::user()->role == 1)
-        <li class="{{Request::segment(1) == 'mataKuliah'? 'active' : ''}}">
-            <a href="/mataKuliah">
-                <i class='bx bx-book icon'></i>
-                <span class="link_name">Mata Kuliah</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="/mataKuliah">Mata Kuliah</a></li>
-            </ul>
-        </li>
-        <li class="{{Request::segment(1) == 'mengajar'? 'active' : ''}}">
-            <a href="/mengajar">
-                <i class='bx bx-chalkboard'></i>
-                <span class="link_name">Mengajar</span>
-            </a>
-            <ul class="sub-menu blank">
-                <li><a class="link_name" href="/mengajar">Mengajar</a></li>
-            </ul>
-        </li>
-        @endif
-
+        
         {{-- ============== LOGOUT DAN BOTTOM SIDE BAR ================ --}}
         <li>        
             <form method="POST" action="{{ route('logout') }}">

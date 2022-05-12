@@ -20,6 +20,9 @@ class DosenController extends Controller
      */
     public function read()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         return view('dosen.read', [
             'user' => User::all(),
             'daftarbidkah' => DaftarBidangKeahlian::all(),
@@ -27,9 +30,15 @@ class DosenController extends Controller
         ]);
     }
     public function showCreate(){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         return view('dosen.create');
     }
-    public function saveCreate(Request $request){        
+    public function saveCreate(Request $request){   
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };     
         $request->validate([
             'nip' => ['required', 'string', 'max:255'],
             'nama' => ['required', 'string', 'max:255'],
@@ -49,7 +58,7 @@ class DosenController extends Controller
                 'nama' => $request->nama,
                 'email' => $request->email,
                 'password' => '$2y$10$P1cEQWYjiF4eiaKc04c/he4c3bWzQ9gMyvcsieJjsdW04jhmIUkqu',
-                'creditSKS' => '0',
+                'bebanMengajar' => '0',
                 'role' => '2', //1 = admin (kaprodi), 2 = dosen biasa 
                 'darkMode' => '0',
                 'openSideBar' => '1',
@@ -61,6 +70,9 @@ class DosenController extends Controller
     }
     
     public function viewEditBiodata($id, Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $dosen = User::where('id', $id)->first();
         $daftarbidkah = DaftarBidangKeahlian::where('dosen_id', $id);
         return view('dosen.update', [
@@ -68,6 +80,9 @@ class DosenController extends Controller
         ]);
     }
     public function updateEditBiodata(Request $request){  
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
               
         $request->validate([
             'nip' => ['required', 'string', 'max:255'],
@@ -75,7 +90,7 @@ class DosenController extends Controller
             'alias' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'max:255'],
-            'sks' => ['required', 'integer', 'max:255'],
+            'bebanMengajar' => ['required', 'integer', 'max:255'],
             'role' => ['required', 'integer', 'max:255'],
         ]);
         // dd($request);
@@ -112,13 +127,16 @@ class DosenController extends Controller
             $queryDosen['alias'] = $request->alias;
             $queryDosen['email'] = $request->email;
             $queryDosen['password'] = $request->password;
-            $queryDosen['creditSKS'] = $request->sks;
+            $queryDosen['bebanMengajar'] = $request->bebanMengajar;
             $queryDosen['role'] = $request->role;
             $queryDosen->save();
             return redirect("/dosen");
         }
     }
     public function deleteDosen($id, Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $dosen = User::findOrFail($id);
         
         $daftarBidangKeahlian = DaftarBidangKeahlian::where('dosen_id', $id)->get();
@@ -131,6 +149,9 @@ class DosenController extends Controller
         return redirect("/dosen");
     }
     public function viewEditBidangKeahlian($id, Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $dosen = User::findOrFail($id);
         $bidkah = BidangKeahlian::all();
         $daftarbidkah = DaftarBidangKeahlian::where('dosen_id', $id)->get();
@@ -141,6 +162,9 @@ class DosenController extends Controller
         ]);
     }
     public function saveEditBidangKeahlian(Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $request->validate([
             'idDosen' => ['required', 'int', 'max:255'],
             'idBidangKeahlian' => ['required', 'int', 'max:255']
@@ -170,9 +194,28 @@ class DosenController extends Controller
         
     }
     public function deleteEditBidangKeahlian(Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $daftarBidangKeahlian = DaftarBidangKeahlian::where('id', $request->idDaftarBidKah)->first();
         $daftarBidangKeahlian->delete();
         return redirect("/dosen/update/bidangKeahlian/$request->idDosen");
+    }
+
+    public function bebanDosen(Request $request) {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+        $mengajar = null;
+        if($request->idDosen){
+            $mengajar = Mengajar::where('dosen_id', '=', $request->idDosen)->get();
+        }
+        return view('dosen.beban', [
+            'request' => $request,
+            'user' => User::all(),
+            'daftarbidkah' => DaftarBidangKeahlian::all(),
+            'mengajars' => $mengajar
+        ]);
     }
 
 }

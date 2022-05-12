@@ -6,6 +6,7 @@ use App\Http\Requests\StoreBidangKeahlianRequest;
 use App\Http\Requests\UpdateBidangKeahlianRequest;
 use App\Models\BidangKeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 //Hello
 class BidangKeahlianController extends Controller
 {
@@ -26,6 +27,9 @@ class BidangKeahlianController extends Controller
      */
     public function read()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        }
         $viewBidangKeahlian = BidangKeahlian::all();
         return view('bidangKeahlian.read', [
             'bidangKeahlian' => $viewBidangKeahlian,
@@ -34,6 +38,9 @@ class BidangKeahlianController extends Controller
 
     public function showCreate()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        }
         return view('bidangKeahlian.create');
     }
 
@@ -46,6 +53,9 @@ class BidangKeahlianController extends Controller
      */
     public function saveCreate(Request $request)
     { 
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        }
         $request->validate([
             'namaBidangKeahlian' => ['required', 'string', 'max:255'],
         ]);
@@ -68,6 +78,9 @@ class BidangKeahlianController extends Controller
 
     public function showUpdate($id, Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        }
         $bidkah = BidangKeahlian::where('id', $id)->first();
         return view('bidangKeahlian.update', [
             'bidangKeahlian' => $bidkah,
@@ -76,6 +89,9 @@ class BidangKeahlianController extends Controller
 
     public function saveUpdate(Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        }
         $queryBidkah = BidangKeahlian::where('id', $request->idBidangKeahlian)->first();
         $queryValid = BidangKeahlian::where('namaBidangKeahlian', '=', $request->namaBidangKeahlian)->first();
         $request->validate([

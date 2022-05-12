@@ -13,12 +13,11 @@
     @include('sections.cardOpen')
         <div class="row mb-3 mt-1">
             <div class="col-6">
-                <h5 class="card-title">Paket Kurikulum 
-                    @if(isset($request->tingkat) && $request->tingkat != "" &&
-                        isset($request->prodi) && $request->prodi != "" &&
+                <h5 class="card-title">Paket 
+                    @if(isset($request->prodi) && $request->prodi != "" &&
                         isset($request->semester) && $request->semester != "" &&
                         isset($request->kurikulum) && $request->kurikulum != "")
-                        {{$request->tingkat}} {{$request->prodi}} {{$request->semester}} (Kurikulum {{$kurikulums->where('id', $request->kurikulum)->first()->namaKurikulum}})
+                        {{$request->tingkat}} {{$request->prodi}} Semester {{$request->semester}} Kurikulum {{$kurikulums->where('id', $request->kurikulum)->first()->namaKurikulum}}
                     @endif
                 </h5>
             </div>
@@ -27,61 +26,57 @@
                     
                 </div>
             </div>
-            <form action="/paketKurikulum" method="GET">
-                <div class="row mt-2 mb-3 me-1">
-                    <div class="col-lg-2">   
-                        Tingkat                 
-                        <select name="tingkat" class="form-select" aria-label="Default select example">
-                            <option @if($request->tingkat == "")selected @endif value="" hidden>Tingkat</option>                        
-                            <option @if($request->tingkat == "1")selected @endif value="1">1</option>
-                            <option @if($request->tingkat == "2")selected @endif value="2">2</option>
-                            <option @if($request->tingkat == "3")selected @endif value="3">3</option>
-                            <option @if($request->tingkat == "4")selected @endif value="4">4</option>
-                        </select>     
-                    </div>
-                    <div class="col-lg-2">         
-                        Prodi           
-                        <select name="prodi" class="form-select" aria-label="Default select example">
-                            <option @if($request->prodi == "")selected @endif hidden value="">Prodi</option>                        
-                                <option @if($request->prodi == "D3")selected @endif value="D3">D3</option>
-                                <option @if($request->prodi == "D4")selected @endif value="D4">D4</option>
-                        </select>     
-                    </div>
-                    <div class="col-lg-2">      
-                        Semester              
-                        <select name="semester" class="form-select" aria-label="Default select example">
-                            <option @if($request->semester == "")selected @endif hidden value="">Semester</option>                        
-                                <option @if($request->semester == "Ganjil")selected @endif value="Ganjil">Ganjil</option>
-                                <option @if($request->semester == "Genap")selected @endif value="Genap">Genap</option>
-                        </select>     
-                    </div>
-                    <div class="col-lg-2">  
-                        Kurikulum                  
-                        <select name="kurikulum" class="form-select" aria-label="Default select example">
-                            <option @if($request->kurikulum == "")selected @endif hidden value="">Kurikulum</option> 
-                            @foreach($kurikulums as $kurikulum)
-                                <option {{$request->kurikulum == (int)$kurikulum->id?"selected":""}} value='{{$kurikulum->id}}'>{{$kurikulum->namaKurikulum}}</option>
-                            @endforeach                       
-                                {{-- <option @if($request->kurikulum == "2013")selected @endif value="2013">2013</option>
-                                <option @if($request->kurikulum == "Merdeka")selected @endif value="Merdeka">Merdeka</option> --}}
-                        </select>     
-                    </div>
-                    <div class="col-lg-2">  
-                        <br>                
-                        <button type="submit" class="btn btn-success d-flex align-items-center">
-                            <i class='bx bx-file-find' style="font-size: 20px;"></i>&nbsp;Cari
-                        </button>    
-                    </div>    
-                    {{-- <div class="col-lg-2">  
-                        <br>       
-                    </div>     --}}
+            
+            <div class="row mt-2 mb-3">
+                <div class="col-lg-3">   
+                    Prodi                 
+                    <select name="prodi" class="form-select @if($request->prodi == "") is-invalid @endif" id="prodiDropDown">
+                        <option hidden value="">Prodi</option>                            
+                        <option @if($request->prodi == "D3") selected @endif value="D3">D3</option>
+                        <option @if($request->prodi == "D4") selected @endif value="D4">D4</option>
+                    </select>     
                 </div>
-            </form>       
-
-            @if(isset($request->tingkat) && $request->tingkat != "" &&
-                isset($request->prodi) && $request->prodi != "" &&
-                isset($request->semester) && $request->semester != "" &&
-                isset($request->kurikulum) && $request->kurikulum != "")
+                <div class="col-lg-3">   
+                    Semester                 
+                    <select name="semester" class="form-select @if($request->prodi != "" && $request->semester == "") is-invalid @endif" id="semesterDropDown" 
+                    @if($request->prodi == "") disabled @endif>
+                        <option hidden value="">Semester</option>                            
+                        <option @if($request->semester == "1") selected @endif value="1">1</option>
+                        <option @if($request->semester == "2") selected @endif value="2">2</option>
+                        <option @if($request->semester == "3") selected @endif value="3">3</option>
+                        <option @if($request->semester == "4") selected @endif value="4">4</option>
+                        <option @if($request->semester == "5") selected @endif value="5">5</option>
+                        <option @if($request->semester == "6") selected @endif value="6">6</option>
+                        @if($request->prodi == "D4")
+                            <option @if($request->semester == "7") selected @endif value="7">7</option>
+                            <option @if($request->semester == "8") selected @endif value="8">8</option>
+                        @endif
+                    </select>     
+                </div>
+                <div class="col-lg-3">  
+                    Kurikulum      
+                    <select name="kurikulum" class="form-select @if($request->prodi != "" && $request->semester != "" && $request->kurikulum == "") is-invalid @endif" id="kurikulumDropDown"
+                        @if($request->prodi == "" || $request->semester == "") disabled @endif>
+                            <option hidden value="">Kurikulum</option>
+                            @foreach($kurikulums as $kurikulum)
+                            <option @if($request->kurikulum == $kurikulum->id) selected @endif value="{{$kurikulum->id}}">{{$kurikulum->namaKurikulum}}</option>
+                            @endforeach
+                        </select>     
+                    {{-- <input type="text" class="form-control" value="{{$kelas->kurikulum()->namaKurikulum}}" disabled>    --}}
+                </div>     
+                {{-- <div class="col-lg-3"> 
+                    @if($request->prodi != "" && $request->semester != "") 
+                        <br>                  
+                        <button class="btn btn-primary float-end me-3" data-bs-toggle="modal" data-bs-target="#ubahKurikulum">
+                            <i class='bx bx-pencil' style="font-size: 15px;"></i>&nbsp;Edit Kurikulum
+                        </button>  
+                    @endif
+                </div>            --}}
+            </div>   
+            
+            @if($request->prodi != "" &&
+                $request->semester != "" &&
+                $request->kurikulum != "")
             <div class="row mt-3">
                 <div class="col mt-2">
                     <h6>Total SKS : <b>
@@ -109,7 +104,8 @@
                         <tr>
                         <th class="th" scope="col">Nama Mata Kuliah</th>
                         <th class="th" scope="col">SKS</th>
-                        <th class="th" scope="col">Edit</th>
+                        <th class="th" scope="col">Jam</th>
+                        <th class="th" scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -117,6 +113,7 @@
                             <tr>
                                 <td>{{$paketKurikulum->mataKuliah()->namaMataKuliah}}</td>
                                 <td>{{$paketKurikulum->mataKuliah()->sks}}</td>
+                                <td>{{$paketKurikulum->mataKuliah()->jam}}</td>
                                 <td>
                                     <form action="/paketKurikulum/delete" method="POST">@csrf
                                         <input type="hidden" name="id" value="{{$paketKurikulum->id}}">
@@ -156,8 +153,8 @@
                             </select>        
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -165,21 +162,53 @@
         </div>
 
         @else
-        <div class="container mt-3">
+        @if($request->prodi == "")
             <div class="alert alert-danger" role="alert">
-                Silahkan pilih
-                @if($request->tingkat == "")(Tingkat) @endif
-                @if($request->prodi == "")(prodi) @endif
-                @if($request->semester == "")(semester) @endif
-                @if($request->kurikulum == "")(kurikulum) @endif
-                terlebih dahulu
+                Silahkan pilih Prodi terlebih dahulu
             </div>
-        </div>
+        @else
+            @if($request->semester == "")
+                <div class="alert alert-danger" role="alert">
+                    Silahkan pilih Semester
+                </div>                
+            @else
+                <div class="alert alert-danger" role="alert">
+                    Silahkan pilih Kurikulum
+                </div>
+            @endif
+        @endif
         @endif
     @include('sections.cardClose')
 @endsection
 
 
-@section('js')
+@section('script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#prodiDropDown").change(function() {
+                var prodi = $(this).find(":selected").val();
+                var kurikulum = "";
+                const urlParams = new URLSearchParams(window.location.search);
+                if(urlParams.get('kurikulum')){
+                    var kurikulum = "&kurikulum="+urlParams.get('kurikulum');
+                }
+                window.location.replace("http://sks-pens.site/paketKurikulum?prodi="+prodi+kurikulum);
+            }) 
+            $("#semesterDropDown").change(function() {    
+                var semester = $(this).find(":selected").val();
+                var kurikulum = "";
+                const urlParams = new URLSearchParams(window.location.search);
+                if(urlParams.get('kurikulum')){
+                    var kurikulum = "&kurikulum="+urlParams.get('kurikulum');
+                }
+                window.location.replace("http://sks-pens.site/paketKurikulum?prodi="+urlParams.get('prodi')+"&semester="+semester+kurikulum);
+            }) 
+            $("#kurikulumDropDown").change(function() {    
+                var kurikulum = $(this).find(":selected").val();
+                const urlParams = new URLSearchParams(window.location.search);
+                window.location.replace("http://sks-pens.site/paketKurikulum?prodi="+urlParams.get('prodi')+"&semester="+urlParams.get('semester')+"&kurikulum="+kurikulum);
+            }) 
+        });
+    </script>
     <script type="text/javascript" src="js/paketKurikulum/script.js"></script>
 @endsection

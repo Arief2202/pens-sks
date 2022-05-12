@@ -15,9 +15,11 @@ class CreateMengajarsTable extends Migration
     {
         Schema::create('mengajars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dosen_id');
-            $table->foreignId('kelas_id');
             $table->foreignId('mataKuliah_id');
+            $table->foreignId('dosen_id');
+            $table->string('prodi');
+            $table->string('semester');
+            $table->string('kelas');
             $table->timestamps();
         });
     }

@@ -19,8 +19,8 @@
         </div>
 
         <div class="float-end mt-4 mb-3 me-3">
-            <a class="btn btn-outline-danger" href="/bidangKeahlian">Cancel</a>
-            <button class="btn btn-success" type="submit">Update</button>
+            <a class="btn btn-outline-secondary" href="/bidangKeahlian">Cancel</a>
+            <button class="btn btn-primary" type="submit">Update</button>
         </div>
     </form>        
     @include('sections.cardClose')

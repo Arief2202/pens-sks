@@ -22,7 +22,7 @@
                         <thead class="thead">
                             <tr>
                                 <th class="th" scope="col">Nama Bidang Keahlian</th>
-                                <th class="th" scope="col">Edit</th>
+                                <th class="th" scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>

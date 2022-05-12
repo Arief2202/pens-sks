@@ -7,6 +7,7 @@ use App\Http\Controllers\BidangKeahlianController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\PaketKurikulumController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SksMaksController;
@@ -27,24 +28,26 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/sidebar2', function () {return view('sidebar2.index');});
 
-    Route::get('/dashboard', function () {return view('dashboard.read');})->name('dashboard');
+    Route::controller(DashboardController::class)->group(function () {
+        Route::get('/dashboard', 'read')->name('dashboard');
+    });
 
     Route::controller(BidangKeahlianController::class)->group(function () {
-        Route::get('/bidangKeahlian', 'read')->name('BidangKeahlianCreate');
-        Route::get('/bidangKeahlian/create', 'showCreate')->name('BidangKeahlianStoreView');
-        Route::post('/bidangKeahlian/create', 'saveCreate')->name('BidangKeahlianStore');
-        Route::get('/bidangKeahlian/update/{id}/', 'showUpdate')->name('BidangKeahlianUpdateView');
-        Route::post('/bidangKeahlian/update', 'saveUpdate')->name('BidangKeahlianUpdate');
+        Route::get('/bidangKeahlian', 'read');
+        Route::get('/bidangKeahlian/create', 'showCreate');
+        Route::post('/bidangKeahlian/create', 'saveCreate');
+        Route::get('/bidangKeahlian/update/{id}/', 'showUpdate');
+        Route::post('/bidangKeahlian/update', 'saveUpdate');
     });
-   
+
     Route::controller(MataKuliahController::class)->group(function () {
-        Route::get('/mataKuliah', 'read')->name('MataKuliahCreate');
-        Route::get('/mataKuliah/create', 'showCreate')->name('MataKuliahStoreView');
-        Route::post('/mataKuliah/create', 'saveCreate')->name('MataKuliahStore');
-        Route::get('/mataKuliah/update/{id}/', 'showUpdate')->name('MataKuliahUpdateView');
-        Route::post('/mataKuliah/update', 'saveUpdate')->name('MataKuliahUpdate');
+        Route::get('/mataKuliah', 'read');
+        Route::get('/mataKuliah/create', 'showCreate');
+        Route::post('/mataKuliah/create', 'saveCreate');
+        Route::get('/mataKuliah/update/{id}', 'showUpdate');
+        Route::post('/mataKuliah/update', 'saveUpdate');
+        Route::get('/mataKuliah/delete/{id}', 'delete');
     });
 
     Route::controller(dosenController::class)->group(function () {
@@ -56,7 +59,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/dosen/update/bidangKeahlian/{id}/', 'viewEditBidangKeahlian')->name('DosenUpdate2View');
         Route::post('/dosen/update/bidangKeahlian/add', 'saveEditBidangKeahlian');
         Route::post('/dosen/update/bidangKeahlian/delete', 'deleteEditBidangKeahlian');
-        Route::get('/dosen/delete/{id}', 'deleteDosen');      
+        Route::get('/dosen/delete/{id}', 'deleteDosen');     
+        Route::get('/dosen/profile', 'bebanDosen');
     });
 
     Route::controller(PaketKurikulumController::class)->group(function () {
@@ -72,13 +76,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/kurikulum/update/{id}/', 'showUpdate')->name('KurikulumUpdateView');
         Route::post('/kurikulum/update', 'saveUpdate')->name('KurikulumUpdate');
         
-    });
-
-    Route::controller(SksMaksController::class)->group(function () {
-        Route::get('/sksMaks/update', 'showUpdate')->name('sksMaksUpdateView');
-        Route::post('/sksMaks/update', 'saveUpdate')->name('sksMaksUpdate');
-    });
-    
+    });    
     Route::controller(KelasController::class)->group(function () {
         Route::get('/kelas', 'read')->name('kelas');
         Route::get('/kelas/create', 'showCreate')->name('KelasStoreView');
@@ -88,9 +86,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/kelas/delete/{id}/', 'deleteKelas');
     });
     Route::controller(MengajarController::class)->group(function () {
-        Route::get('/kelas/mengajar', 'read')->name('mengajar'); 
-        Route::post('/kelas/mengajar', 'create');
-        Route::post('/kelas/mengajar/delete', 'delete');
+        Route::get('/mengajar', 'read')->name('mengajar'); 
+        Route::post('/mengajar', 'create');
+        Route::post('/mengajar/delete', 'delete');
+        Route::post('/mengajar/ubahKurikulum', 'ubahKurikulum');
     });
 });
 

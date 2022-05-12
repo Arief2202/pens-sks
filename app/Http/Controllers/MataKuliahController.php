@@ -7,54 +7,39 @@ use App\Http\Requests\UpdateMataKuliahRequest;
 use App\Models\MataKuliah;
 use App\Models\BidangKeahlian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MataKuliahController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function read()
     {
-        $namaMataKuliah = MataKuliah::all();
-        // dd($namaBidangKeahlian);
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         return view('mataKuliah.read', [
-            'mataKuliah' => $namaMataKuliah,
+            'mataKuliah' => MataKuliah::all(),
         ]);
     }
 
     public function showCreate()
     {
-        $namaBidangKeahlian = BidangKeahlian::all();
-        // dd($namaBidangKeahlian);
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         return view('mataKuliah.create', [
-            'bidangKeahlian' => $namaBidangKeahlian,
+            'bidangKeahlian' => BidangKeahlian::all(),
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMataKuliahRequest  $request
-     * @return \Illuminate\Http\Response
-     */
     public function saveCreate(Request $request)
     { 
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $request->validate([
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
-            'sks' => ['required', 'integer','gt:1', 'max:11'],
+            'sks' => ['required', 'integer','gt:0', 'max:11'],
             'jam' => ['required', 'integer','gt:0', 'max:11'],
         ]);
         $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)->first();
@@ -77,9 +62,12 @@ class MataKuliahController extends Controller
         
     }
 
-    public function showUpdate($id, Request $request)
+    public function showUpdate($id)
     {
-        $matkul = MataKuliah::where('id', $id)->first();
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+        $matkul = MataKuliah::findOrFail($id);
         $bidkah = BidangKeahlian::all();
         return view('mataKuliah.update', [
             'bidangKeahlian' => $bidkah,
@@ -89,15 +77,18 @@ class MataKuliahController extends Controller
 
     public function saveUpdate(Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
         $request->validate([
             'idBidangKeahlian' => ['required', 'string', 'max:255'],
             'namaMataKuliah' => ['required', 'string', 'max:255'],
-            'sks' => ['required', 'integer', 'gt:1', 'max:11'],
+            'sks' => ['required', 'integer', 'gt:0', 'max:11'],
             'jam' => ['required', 'integer', 'gt:0', 'max:11'],
         ]);
         $queryValid = MataKuliah::where('namaMataKuliah', '=', $request->namaMataKuliah)
-                                ->where('id', '!=', $request->idBidangKeahlian)->first();
-        $queryMatkul = MataKuliah::where('id', $request->idMataKuliah)->first();
+                                ->where('id', '!=', $request->idMataKuliah)->first();
+        $queryMatkul = MataKuliah::findOrFail($request->idMataKuliah);
         if($queryValid){
             $matkul = MataKuliah::where('id', $request->idMataKuliah)->first();
             $bidkah = BidangKeahlian::all();
@@ -114,52 +105,15 @@ class MataKuliahController extends Controller
             $queryMatkul['jam'] = $request->jam;
             $queryMatkul->save();
             return redirect("/mataKuliah");
-        }
-        
+        }   
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\MataKuliah  $mataKuliah
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MataKuliah $mataKuliah)
+    public function delete($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\MataKuliah  $mataKuliah
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(MataKuliah $mataKuliah)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMataKuliahRequest  $request
-     * @param  \App\Models\MataKuliah  $mataKuliah
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMataKuliahRequest $request, MataKuliah $mataKuliah)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\MataKuliah  $mataKuliah
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(MataKuliah $mataKuliah)
-    {
-        //
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+        $query = MataKuliah::findOrFail($id);
+        $query->delete();
+        return redirect("/mataKuliah");
     }
 }

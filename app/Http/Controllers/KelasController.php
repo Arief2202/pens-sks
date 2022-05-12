@@ -7,11 +7,17 @@ use App\Http\Requests\UpdateKelasRequest;
 use App\Models\Kelas;
 use App\Models\Kurikulum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KelasController extends Controller
 {
+
     public function read()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $viewKelas = Kelas::all();
         return view('kelas.read', [
             'kelas' => $viewKelas
@@ -20,6 +26,10 @@ class KelasController extends Controller
 
     public function showCreate()
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $namaKurikulum = Kurikulum::all();
         return view('kelas.create', [
             'kurikulum' => $namaKurikulum,
@@ -29,6 +39,10 @@ class KelasController extends Controller
 
     public function saveCreate(Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $request->validate([
             'namaKelas' => ['required', 'string', 'max:255'],
             'idKurikulum' => ['required', 'int', 'max:20'],
@@ -65,6 +79,10 @@ class KelasController extends Controller
 
     public function showUpdate($id, Request $request)
     {
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $kls = Kelas::where('id', $id)->first();
         $kuri = Kurikulum::all();
         return view('kelas.update', [
@@ -75,7 +93,10 @@ class KelasController extends Controller
 
     public function saveUpdate(Request $request)
     {
-        
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+
         $request->validate([
             'namaKelas' => ['required', 'string', 'max:255'],
             'idKurikulum' => ['required', 'int', 'max:20'],
@@ -115,6 +136,10 @@ class KelasController extends Controller
 
     
     public function deleteKelas($id, Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+        
         $kelas = Kelas::where('id', $id)->first();
         $kelas->delete();
         return redirect("/kelas");

@@ -26,15 +26,15 @@
                             {{-- <th class="th" scope="col">Keahlian</th> --}}
                             {{-- <th class="th" scope="col">Jabatan</th> --}}
                             <th class="th" scope="col">Pembebanan Jam</th>
-                            <th class="th" scope="col">Edit</th>
+                            <th class="th" scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                             @foreach($user as $dosen)
                               <?php
-                                $minusSKS = 0;
+                                $totalJam = 0;
                                 foreach($mengajar->where('dosen_id', '=', $dosen->id) as $ajar){
-                                  $minusSKS += intval($ajar->mataKuliah()->sks);
+                                  $totalJam += intval($ajar->mataKuliah()->jam);
                                 }
                               ?>
                             <tr>
@@ -58,7 +58,7 @@
                                 Dosen
                                 @endif
                                 </td> --}}
-                              <td>{{intval($dosen['CreditSKS']) - $minusSKS}}</td>
+                              <td>{{intval($dosen['bebanMengajar'])/* - $totalJam*/}}</td>
                                 {{-- kurang sks maks dari masing masing dosen --}}
                               <td>
                                 <a href="/dosen/update/bidangKeahlian/{{$dosen->id}}" style="background:none;border:none;outline:none;"><i class='bx bx-pencil tableAction'></i></a>
