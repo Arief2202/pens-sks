@@ -12,17 +12,8 @@ class UserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public static function run()
     {
-        //developer
-        User::insert([
-            ['nip' => '3120500011', 'nama' => 'Mohammad Arief Darmawan', 'alias' => 'Arief', 'email' => 'arief.d2202@gmail.com', 'role' => '1', 'password' => '$2y$10$P1cEQWYjiF4eiaKc04c/he4c3bWzQ9gMyvcsieJjsdW04jhmIUkqu'],
-            ['nip' => '3120500021', 'nama' => 'Ade Bayu Budiono', 'alias' => 'Ade', 'email' => 'adebayubudiono@it.student.pens.ac.id', 'role' => '1', 'password' => '$2y$10$GL/ZviqnLhgpwaBGNfioee.5hkpZHV97BO2riRw0R3S1WSnM5HVda'],
-            ['nip' => '3120500009', 'nama' => 'Rayhan Munir Wibowo', 'alias' => 'Rayhan', 'email' => 'rayhan439@gmail.com', 'role' => '1', 'password' => '$2y$10$9vZ1O4EEEptVYiUcRXIQoOBoBiAuD6Y1yDv2Ev5ThGqyJfFzhr8G6'],
-            ['nip' => '3120500029', 'nama' => 'Farhan Izzudin Az Zufar', 'alias' => 'Farhan', 'email' => 'farhanizzaz@gmail.com', 'role' => '1', 'password' => '$2y$10$f43JzdIy4RAlH3Gl6iPfBu5Jar1TG2nlDrM4cqOzQcVsjwyZ5Swn2'],
-            ['nip' => '3120500012', 'nama' => 'Madani Sofi Arina Hanif', 'alias' => 'Ayin', 'email' => 'ayinmadani@gmail.com', 'role' => '1', 'password' => '$2y$10$JUUKFmyB9pWCIAcTjC12QOT5XdV7t8peTA3.zbNvaUUj.pwGwBVq.']
-        ]);
-
         //dosen
         User::insert([
             ['nip' => '197505302003121001', 'email' => 'syauqi@pens.ac.id', 'nama' => 'Ahmad Syauqi Ahsan, S.Kom., M.T.', 'alias' => 'Pak Syauqi', 'bebanMengajar' => '16'],	//Database, Big Data
@@ -60,6 +51,15 @@ class UserSeeder extends Seeder
         
         User::insert([
             ['nip' => '0', 'nama' => 'Admin', 'alias' => 'Admin', 'email' => 'admin@sks-pens.site', 'role' => '1', 'password' => '$2y$10$P1cEQWYjiF4eiaKc04c/he4c3bWzQ9gMyvcsieJjsdW04jhmIUkqu'],
+        ]);
+        
+        //developer
+        User::insert([
+            ['nip' => '3120500011', 'nama' => 'Mohammad Arief Darmawan', 'alias' => 'Arief', 'email' => 'arief.d2202@gmail.com', 'role' => '1', 'password' => '$2y$10$P1cEQWYjiF4eiaKc04c/he4c3bWzQ9gMyvcsieJjsdW04jhmIUkqu'],
+            ['nip' => '3120500021', 'nama' => 'Ade Bayu Budiono', 'alias' => 'Ade', 'email' => 'adebayubudiono@it.student.pens.ac.id', 'role' => '1', 'password' => '$2y$10$GL/ZviqnLhgpwaBGNfioee.5hkpZHV97BO2riRw0R3S1WSnM5HVda'],
+            ['nip' => '3120500009', 'nama' => 'Rayhan Munir Wibowo', 'alias' => 'Rayhan', 'email' => 'rayhan439@gmail.com', 'role' => '1', 'password' => '$2y$10$9vZ1O4EEEptVYiUcRXIQoOBoBiAuD6Y1yDv2Ev5ThGqyJfFzhr8G6'],
+            ['nip' => '3120500029', 'nama' => 'Farhan Izzudin Az Zufar', 'alias' => 'Farhan', 'email' => 'farhanizzaz@gmail.com', 'role' => '1', 'password' => '$2y$10$f43JzdIy4RAlH3Gl6iPfBu5Jar1TG2nlDrM4cqOzQcVsjwyZ5Swn2'],
+            ['nip' => '3120500012', 'nama' => 'Madani Sofi Arina Hanif', 'alias' => 'Ayin', 'email' => 'ayinmadani@gmail.com', 'role' => '1', 'password' => '$2y$10$JUUKFmyB9pWCIAcTjC12QOT5XdV7t8peTA3.zbNvaUUj.pwGwBVq.']
         ]);
     }
 }

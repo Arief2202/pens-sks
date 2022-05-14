@@ -6,6 +6,8 @@ use App\Http\Requests\StoreMataKuliahRequest;
 use App\Http\Requests\UpdateMataKuliahRequest;
 use App\Models\MataKuliah;
 use App\Models\BidangKeahlian;
+use App\Models\Mengajar;
+use App\Models\PaketKurikulum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -114,6 +116,8 @@ class MataKuliahController extends Controller
         };
         $query = MataKuliah::findOrFail($id);
         $query->delete();
+        foreach(PaketKurikulum::where('MataKuliah_id', '=', $id)->get() as $found) $found->delete();
+        foreach(Mengajar::where('MataKuliah_id', '=', $id)->get() as $found) $found->delete();
         return redirect("/mataKuliah");
     }
 }

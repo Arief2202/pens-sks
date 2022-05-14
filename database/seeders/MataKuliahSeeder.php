@@ -6,7 +6,7 @@ use App\Models\MataKuliah;
 
 class MataKuliahSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
         MataKuliah::insert([
             ['bidangKeahlian_id' => '22', 'sks' => '2', 'jam' => '2', 'namaMataKuliah' => 'Matematika 1'],

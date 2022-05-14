@@ -59,6 +59,7 @@
         
         {{-- ============== Active Component Sidebar ============= --}} 
         
+        @if(Auth::user()->role == 1)
         <li class="{{Request::segment(1) == 'dashboard'? 'active' : ''}}">
             <a href="/">
                 <i class='bx bx-chart icon'></i>
@@ -68,6 +69,19 @@
                 <li><a class="link_name" href="/">Dashboard</a></li>
             </ul>
         </li>
+        @endif
+
+        @if(Auth::user()->role == 2)
+        <li class="{{Request::segment(1) == 'dashboard'? 'active' : ''}}">
+            <a href="/dosen/profile">
+                <i class='bx bx-chart icon'></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/">Dashboard</a></li>
+            </ul>
+        </li>
+        @endif
         
         @if(Auth::user()->role == 1)
         <li class="{{Request::segment(1) == 'dosen'? 'active' : ''}}">
@@ -137,6 +151,19 @@
         @endif
 
         {{-- ============== LOGOUT DAN BOTTOM SIDE BAR ================ --}}
+        <li>
+            <div class="sidebar-footer">
+                <span class='bx bx-moon moon'></span>
+                <span class="link_name">Dark mode</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Dark Mode</a></li>
+                </ul>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </div>        
+        </li>
+        
         <li>        
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -152,18 +179,9 @@
                 </x-responsive-nav-link>
             </form>   
         </li>
-        <li>
-            <div class="sidebar-footer">
-                <span class='bx bx-moon moon'></span>
-                <span class="link_name">Dark mode</span>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Dark Mode</a></li>
-                </ul>
-                <div class="toggle-switch">
-                    <span class="switch"></span>
-                </div>
-            </div>        
-        </li>
+
+        
+
         {{-- ============== END LOGOUT DAN BOTTOM SIDE BAR ============== --}}
     </ul>
 </div>

@@ -81,9 +81,9 @@ class MengajarController extends Controller
     }
 
     public function ubahKurikulum(Request $request){
-        if(Auth::user()->role == 2){
+        if(Auth::user()->role != 1){
             return redirect('dashboard');
-        };
+        }
 
         if(!$request->kurikulum){
             $kelas = Kelas::findOrFail($request->idKelas);
@@ -92,6 +92,9 @@ class MengajarController extends Controller
         else{
             $kelas = Kelas::findOrFail($request->idKelas);
             $kelas->kurikulum_id = $request->kurikulum;
+            foreach(Mengajar::where('prodi', '=', $kelas->prodi)
+                            ->where('semester', '=', $kelas->semester)
+                            ->get() as $found) $found->delete();
             $kelas->save();
             return redirect("/mengajar?prodi=".$kelas->prodi."&semester=".$kelas->semester);
         }

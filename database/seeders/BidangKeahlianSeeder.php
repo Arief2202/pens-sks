@@ -6,7 +6,7 @@ use App\Models\BidangKeahlian;
 
 class BidangKeahlianSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
         BidangKeahlian::insert([
             ['namaBidangKeahlian' => 'Database'],

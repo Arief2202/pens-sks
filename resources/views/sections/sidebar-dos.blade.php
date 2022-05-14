@@ -87,6 +87,18 @@
 
         
         {{-- ============== LOGOUT DAN BOTTOM SIDE BAR ================ --}}
+        <li>
+            <div class="sidebar-footer">
+                <span class='bx bx-moon moon'></span>
+                <span class="link_name">Dark mode</span>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Dark Mode</a></li>
+                </ul>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </div>        
+        </li>
         <li>        
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
@@ -102,18 +114,9 @@
                 </x-responsive-nav-link>
             </form>   
         </li>
-        <li>
-            <div class="sidebar-footer">
-                <span class='bx bx-moon moon'></span>
-                <span class="link_name">Dark mode</span>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Dark Mode</a></li>
-                </ul>
-                <div class="toggle-switch">
-                    <span class="switch"></span>
-                </div>
-            </div>        
-        </li>
+
+        
+
         {{-- ============== END LOGOUT DAN BOTTOM SIDE BAR ============== --}}
     </ul>
 </div>

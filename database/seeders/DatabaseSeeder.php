@@ -2,15 +2,15 @@
 
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
-use Database\Seeders\BidangKeahlianSeeder;
-use Database\Seeders\DaftarBidangKeahlianSeeder;
-use Database\Seeders\KelasSeeder;
-use Database\Seeders\KurikulumSeeder;
-use Database\Seeders\MataKuliahSeeder;
-use Database\Seeders\MengajarSeeder;
-use Database\Seeders\PaketKurikulumSeeder;
-use Database\Seeders\SksMaksSeeder;
-use Database\Seeders\UserSeeder;
+// use Database\Seeders\BidangKeahlianSeeder;
+// use Database\Seeders\DaftarBidangKeahlianSeeder;
+// use Database\Seeders\KelasSeeder;
+// use Database\Seeders\KurikulumSeeder;
+// use Database\Seeders\MataKuliahSeeder;
+// use Database\Seeders\MengajarSeeder;
+// use Database\Seeders\PaketKurikulumSeeder;
+// use Database\Seeders\SksMaksSeeder;
+// use Database\Seeders\UserSeeder;
 
 class DatabaseSeeder extends Seeder
 {

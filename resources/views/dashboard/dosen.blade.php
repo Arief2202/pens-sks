@@ -22,6 +22,10 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <?php 
+                              $totjam = 0;
+                              $totsks = 0;
+                            ?>
                             @foreach($mengajars as $mengajar)
                             <tr>
                               <td>{{$mengajar->prodi}} Semester {{$mengajar->semester}}</td>
@@ -29,7 +33,17 @@
                               <td>{{$mengajar->mataKuliah()->jam}}</td>
                               <td>{{$mengajar->mataKuliah()->sks}}</td>
                             </tr>
+                            <?php
+                              $totjam += $mengajar->mataKuliah()->jam;
+                              $totsks += $mengajar->mataKuliah()->sks;
+                            ?>
                             @endforeach
+                            <tr>
+                              <td>Total</td>
+                              <td></td>
+                              <td>{{$totjam}}</td>
+                              <td>{{$totsks}}</td>
+                            </tr>
                           </tbody>
                       </table>
                     </div>

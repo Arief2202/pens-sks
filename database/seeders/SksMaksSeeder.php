@@ -6,7 +6,7 @@ use App\Models\SksMaks;
 
 class SksMaksSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
         
     }

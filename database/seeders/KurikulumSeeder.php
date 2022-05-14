@@ -6,7 +6,7 @@ use App\Models\Kurikulum;
 
 class KurikulumSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
         Kurikulum::insert([
             ['namaKurikulum' => '2019'],

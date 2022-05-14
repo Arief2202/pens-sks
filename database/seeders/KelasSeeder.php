@@ -6,7 +6,7 @@ use App\Models\Kelas;
 
 class KelasSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
         Kelas::insert([
             ['prodi' => 'D3', 'semester' => '1', 'kurikulum_id' => '1'],

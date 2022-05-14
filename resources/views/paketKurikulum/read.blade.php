@@ -89,6 +89,11 @@
                     ?>
                     </b></h6>
                 </div>
+                <div class="col-7">
+                    <div class="d-flex justify-content-end ">
+                        <a class="btn btn-primary" href="/paketKurikulum/export_excel" role="button">Export Paket Kurikulum</a>
+                    </div>
+                </div>
                 <div class="col">
                     <div class="d-flex justify-content-end ">
                         <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Tambahkan Mata Kuliah</a>

@@ -12,6 +12,7 @@
             </div>
             <div class="col-6">
                 <div class="d-flex justify-content-end ">
+                  <a class="btn btn-primary px-2" href="/dosen/create" role="button">Export Data</a>
                     <a class="btn btn-primary" href="/dosen/create" role="button">Tambahkan Dosen</a>
                 </div>
             </div>

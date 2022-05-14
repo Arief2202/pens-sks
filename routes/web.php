@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/paketKurikulum', 'read')->name('PaketKurikulumCreate');
         Route::post('/paketKurikulum', 'create');
         Route::post('/paketKurikulum/delete', 'delete');
+        // Route::get('/paketKurikulum', 'indexExport');
+        Route::get('/paketKurikulum/export_excel', 'export_excel');
     });
 
     Route::controller(KurikulumController::class)->group(function () {
@@ -91,6 +93,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/mengajar/delete', 'delete');
         Route::post('/mengajar/ubahKurikulum', 'ubahKurikulum');
     });
+
+    Route::get('/siswa', 'SiswaController@index');
+    Route::get('/siswa/export_excel', 'SiswaController@export_excel');
 });
 
 

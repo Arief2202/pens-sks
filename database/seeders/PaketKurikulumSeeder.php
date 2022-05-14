@@ -6,7 +6,7 @@ use App\Models\PaketKurikulum;
 
 class PaketKurikulumSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
         $matkulPerSemester = array(0, 10, 21, 32, 42, 48, 54);
         $pos = 1;

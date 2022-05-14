@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\PaketKurikulum;
 use Illuminate\Http\Request;
 use App\Models\MataKuliah;
+use App\Models\Mengajar;
 use App\Models\Kurikulum;
+use App\Exports\PKExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class PaketKurikulumController extends Controller
 {
@@ -66,18 +70,28 @@ class PaketKurikulumController extends Controller
     }
 
     public function delete( Request $request){
-        if(Auth::user()->role == 2){
+        if(Auth::user()->role != 1){
             return redirect('dashboard');
-        };
-        $paketKurikulum = PaketKurikulum::where('id', $request->id)->first();
-        
-        // $daftarBidangKeahlian = DaftarBidangKeahlian::where('dosen_id', $id)->get();
-        if(Auth::user()->role == 1){
-            // foreach($daftarBidangKeahlian as $daftarbidkah){
-                $paketKurikulum->delete();
-            // }
-            // $dosen->delete();
+        }
+        else{
+            $paketKurikulum = PaketKurikulum::findOrFail($request->id);
+            foreach(Mengajar::where('mataKuliah_id', '=', $paketKurikulum->mataKuliah_id)
+                            ->where('prodi', '=', $paketKurikulum->prodi)
+                            ->where('semester', '=', $paketKurikulum->semester)
+                            ->get() as $found) $found->delete();                            
+            $paketKurikulum->delete();
         }
         return redirect("/paketKurikulum?tingkat=$request->tingkat&prodi=$request->prodi&semester=$request->semester&kurikulum=$request->kurikulum");
     }
+
+    // public function indexExport()
+	// {
+	// 	$paketKurikulum = PaketKurikulum::all();
+	// 	return view('paketKurikulum',['paketKurikulum'=>$paketKurikulum]);
+	// }
+
+    public function export_excel()
+	{
+		return Excel::download(new PKExport, 'paketKurikulum.xlsx');
+	}
 }

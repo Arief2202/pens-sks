@@ -6,7 +6,7 @@ use App\Models\Mengajar;
 
 class MengajarSeeder extends Seeder
 {
-    public function run()
+    public static function run()
     {
          
     }
