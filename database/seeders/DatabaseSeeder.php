@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         DaftarBidangKeahlianSeeder::run();
         KelasSeeder::run();
         KurikulumSeeder::run();
+        NamaKurikulumSeeder::run();
         MataKuliahSeeder::run();
         MengajarSeeder::run();
         PaketKurikulumSeeder::run();

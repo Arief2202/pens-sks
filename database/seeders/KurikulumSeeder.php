@@ -8,9 +8,9 @@ class KurikulumSeeder extends Seeder
 {
     public static function run()
     {
-        Kurikulum::insert([
-            ['namaKurikulum' => '2019'],
-            ['namaKurikulum' => '2022'],
-        ]);
+        // Kurikulum::insert([
+        //     ['namaKurikulum' => '2019', 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')],
+        //     ['namaKurikulum' => '2022', 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')],
+        // ]);
     }
 }

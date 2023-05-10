@@ -19,9 +19,14 @@
     --text-hover-color: #fff;
     --card-color: #FFF;
     --card-url: url(http://sks-pens.site/img/sidebar/light.png);
-
+    --total-bg-color: rgb(211, 230, 248);
+    --total-color: #000000;
     --scroll-color: #4491DF;
     --scroll-bg-color: #707070;
+
+    --color-error: rgb(0, 0, 0);
+    --icon-color: rgb(50, 50, 50);
+    --bg-color-error: rgba(255, 0, 0, 0.5);
 
     /* ====== Transition ====== */
     --tran-03: all 0.2s ease;
@@ -54,6 +59,14 @@ body.dark{
     --text-hover-color: #ccc;
     --card-color: #242526;
     --card-url: url(http://sks-pens.site/img/sidebar/dark.png);
+    --total-bg-color: rgb(25, 26, 26);
+    --total-color: #ffffff;
+    
+    
+    --color-error: #ccc;
+    --bg-color-error: rgba(255, 0, 0, 0.5);
+    --icon-color: #ccc;
+
 
     --btn-color: rgb(13, 110, 253);
     --btn-text-color: #DDD;
@@ -214,4 +227,19 @@ body.dark .home .text{
     color:#fff;
     background-color: var(--primary-color-light-hover);
     border-color:transparent
+}
+
+
+.total{
+    color: var(--total-color);;
+    background-color: var(--total-bg-color);
+}
+
+.error{
+    background-color: var(--bg-color-error);
+    color: var(--color-error);
+}
+
+.error .tableAction{
+    color: var(--icon-color);
 }

@@ -2,7 +2,7 @@
 
 @section('body')
     @include('sections.cardOpen')
-    <form method="POST" action="/kurikulum/create">@csrf
+    <form method="POST" action="/nama-kurikulum/create">@csrf
         <h5 class="card-title">Kurikulum - Create</h5>
         @if(isset($errorMessage))
         <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="float-end mt-4 mb-3 me-3">
-            <a class="btn btn-outline-secondary" href="/kurikulum">Cancel</a>
+            <a class="btn btn-outline-secondary" href="/nama-kurikulum">Cancel</a>
             <button class="btn btn-primary" type="submit">Submit</button>
         </div>
         </form>

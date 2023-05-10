@@ -10,9 +10,9 @@
         <div class="row mb-1 mt-2">
             <div class="col-6">
                 @if($request->prodi != "" && $request->semester != "")
-                    <h5 class="card-title">Pengampu {{$cariKelas->prodi}} Semester {{$cariKelas->semester}} (Kurikulum {{$cariKelas->kurikulum()->namaKurikulum}})</h5>
+                    <h5 class="card-title">Pengampu {{$cariKelas->prodi}} Semester {{$cariKelas->semester}} (Kurikulum {{$cariKelas->namaKurikulum()->namaKurikulum}})</h5>
                 @else
-                    <h5 class="card-title">Halaman Mengajar</h5>
+                    <h5 class="card-title">Halaman Proses Pembebanan</h5>
                 @endif
             </div>
             
@@ -45,12 +45,14 @@
                 <div class="col-lg-3">  
                     @if($request->prodi != "" && $request->semester != "") 
                     Kurikulum      
-                    <input type="text" class="form-control" value="{{$kelas->kurikulum()->namaKurikulum}}" disabled>   
+                    <input type="text" class="form-control" value="{{$kelas->namaKurikulum()->namaKurikulum}}" disabled>   
                     @endif 
                 </div>     
                 <div class="col-lg-3"> 
                     @if($request->prodi != "" && $request->semester != "") 
-                        <br>                  
+                    
+                        <br>      
+                                    
                         <button class="btn btn-primary float-end me-3" data-bs-toggle="modal" data-bs-target="#ubahKurikulum">
                             <i class='bx bx-pencil' style="font-size: 15px;"></i>&nbsp;Edit Kurikulum
                         </button>  
@@ -74,6 +76,10 @@
                           </tr>
                         </thead>
                         <tbody>
+                            <?php 
+                                $totjam = 0;
+                                $totsks = 0;
+                            ?>
                             @foreach($paketKurikulums as $paketKurikulum)
                                 @if($paketKurikulum->prodi == $cariKelas->prodi &&
                                     $paketKurikulum->semester == $cariKelas->semester &&
@@ -82,6 +88,11 @@
                                     <td>{{$paketKurikulum->mataKuliah()->namaMataKuliah}}</td>
                                     <td>{{$paketKurikulum->mataKuliah()->sks}}</td>
                                     <td>{{$paketKurikulum->mataKuliah()->jam}}</td>
+                                    
+                                    <?php 
+                                        $totjam += $paketKurikulum->mataKuliah()->jam; 
+                                        $totsks += $paketKurikulum->mataKuliah()->sks;                            
+                                    ?>
                                     <td>
                                         @if($pengajar = $mengajar->where('kelas', '=', 'A')->where('mataKuliah_id', '=', $paketKurikulums->where('id', '=', $paketKurikulum->id)->first()->mataKuliah()->id)->first())
                                             <form action="/mengajar/delete" method="POST">@csrf
@@ -123,6 +134,13 @@
                                 </tr>
                                 @endif
                             @endforeach
+                            <tr class="total">
+                                <td>Total</td>
+                                <td>{{$totsks}}</td>
+                                <td>{{$totjam}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </table>                    
                 </div>

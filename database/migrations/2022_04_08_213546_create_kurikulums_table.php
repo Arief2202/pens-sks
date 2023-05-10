@@ -15,7 +15,8 @@ class CreateKurikulumsTable extends Migration
     {
         Schema::create('kurikulums', function (Blueprint $table) {
             $table->id();  
-            $table->string('namaKurikulum');           
+            $table->foreignId('kurikulum_id');   
+            $table->timestamp('tahun_masuk');       
             $table->timestamps();
         });
     }

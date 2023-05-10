@@ -22,7 +22,7 @@ class DashboardController extends Controller
             ]);
         }
         else{
-            return view('dashboard.kaprodi');
+            return redirect('/dosen');
         }
         
     }

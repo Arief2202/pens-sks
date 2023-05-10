@@ -9,7 +9,7 @@ use App\Models\PaketKurikulum;
 use Illuminate\Http\Request;
 use App\Models\MataKuliah;
 use App\Models\Mengajar;
-use App\Models\Kurikulum;
+use App\Models\NamaKurikulum;
 use App\Exports\PKExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -27,7 +27,7 @@ class PaketKurikulumController extends Controller
         return view('paketKurikulum.read', [
             'request' => $request,
             'paketKurikulums' => $paketKurikulums,
-            'kurikulums' => Kurikulum::all(),
+            'kurikulums' => NamaKurikulum::all(),
             'mataKuliahs' => MataKuliah::all(),
         ]);
     }
@@ -52,7 +52,7 @@ class PaketKurikulumController extends Controller
             return view('paketKurikulum.read', [
                 'request' => $request,
                 'paketKurikulums' => $paketKurikulums,
-                'kurikulums' => Kurikulum::all(),
+                'kurikulums' => NamaKurikulum::all(),
                 'mataKuliahs' => MataKuliah::all(),
                 'errorMessage' => 'Data sudah ada di database',
             ]);

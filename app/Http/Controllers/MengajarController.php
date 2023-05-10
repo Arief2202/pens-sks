@@ -5,7 +5,7 @@ use App\Models\DaftarBidangKeahlian;
 use App\Models\Mengajar;
 use App\Models\Kelas;
 use App\Models\PaketKurikulum;
-use App\Models\Kurikulum;
+use App\Models\NamaKurikulum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +44,7 @@ class MengajarController extends Controller
                                 ->get();
         }
         return view('mengajar.read',[
-            'kurikulums' => Kurikulum::all(),
+            'kurikulums' => NamaKurikulum::all(),
             'request' => $request,
             'kelas' => $kelas,
             'paketKurikulums' => PaketKurikulum::all(),
@@ -108,5 +108,13 @@ class MengajarController extends Controller
         $mengajar = Mengajar::findOrFail($request->mengajar_id);
         $mengajar->delete();
         return redirect("/mengajar?prodi=".$request->prodi."&semester=".$request->semester);
+    }
+
+    public function lihat(){
+        $returnText = "";
+        foreach(Mengajar::all() as $mengajar){
+            $returnText .= "['mataKuliah_id' => '$mengajar->mataKuliah_id', 'dosen_id' => '$mengajar->dosen_id', 'prodi' => '$mengajar->prodi', 'semester' => '$mengajar->semester', 'kelas' => '$mengajar->kelas'],<br>";
+        }
+        return $returnText;
     }
 }

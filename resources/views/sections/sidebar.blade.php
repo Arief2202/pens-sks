@@ -59,7 +59,7 @@
         
         {{-- ============== Active Component Sidebar ============= --}} 
         
-        @if(Auth::user()->role == 1)
+        {{-- @if(Auth::user()->role == 1)
         <li class="{{Request::segment(1) == 'dashboard'? 'active' : ''}}">
             <a href="/">
                 <i class='bx bx-chart icon'></i>
@@ -69,7 +69,7 @@
                 <li><a class="link_name" href="/">Dashboard</a></li>
             </ul>
         </li>
-        @endif
+        @endif --}}
 
         @if(Auth::user()->role == 2)
         <li class="{{Request::segment(1) == 'dashboard'? 'active' : ''}}">
@@ -95,7 +95,7 @@
             <ul class="sub-menu">
                 <li><a class="link_name">Dosen</a></li>
                 <li><a href="/dosen">Profile Dosen</a></li>
-                <li><a href="/dosen/profile">Beban Dosen</a></li>
+                <li><a href="/dosen/beban">Beban Dosen</a></li>
             </ul>
         </li>
         @endif
@@ -103,7 +103,7 @@
         @if(Auth::user()->role == 1)
         <li class="{{Request::segment(1) == 'paketKurikulum'? 'active' : ''}}">
             <div class="iocn-link">
-                <a href="/paketKurikulum">
+                <a href="/nama-kurikulum">
                     <i class='bx bx-bookmark-alt-minus icon'></i>
                     <span class="link_name">Kurikulum</span>
                 </a>
@@ -111,8 +111,9 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name">Kurikulum</a></li>
+                <li><a href="/nama-kurikulum">Nama Kurikulum</a></li>
                 <li><a href="/paketKurikulum">Paket Kurikulum</a></li>
-                <li><a href="/kurikulum">Nama Kurikulum</a></li>
+                <li><a href="/kurikulum/history">History Kurikulum</a></li>
             </ul>
         </li>
         @endif
@@ -142,10 +143,22 @@
         <li class="{{Request::segment(1) == 'mengajar'? 'active' : ''}}">
             <a href="/mengajar">
                 <i class='bx bx-chalkboard'></i>
-                <span class="link_name">Mengajar</span>
+                <span class="link_name">Proses Pembebanan</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="/mengajar">Mengajar</a></li>
+                <li><a class="link_name" href="/mengajar">Proses Pembebanan</a></li>
+            </ul>
+        </li>
+        @endif
+        
+        @if(Auth::user()->role == 1)
+        <li class="{{Request::segment(1) == 'export'? 'active' : ''}}">
+            <a href="/export">
+                <i class='bx bx-archive-out'></i>
+                <span class="link_name">Export</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="/export">Export</a></li>
             </ul>
         </li>
         @endif

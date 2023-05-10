@@ -206,16 +206,23 @@ class DosenController extends Controller
         if(Auth::user()->role == 2){
             return redirect('dashboard');
         };
-        $mengajar = null;
-        if($request->idDosen){
-            $mengajar = Mengajar::where('dosen_id', '=', $request->idDosen)->get();
-        }
         return view('dosen.beban', [
-            'request' => $request,
             'user' => User::all(),
             'daftarbidkah' => DaftarBidangKeahlian::all(),
-            'mengajars' => $mengajar
+            'mengajar' => Mengajar::all()
         ]);
     }
 
+    public function detailBebanDosen($id, Request $request){
+        if(Auth::user()->role == 2){
+            return redirect('dashboard');
+        };
+        return view('dosen.detailBeban', [
+            'request' => $request,
+            'user' => User::all(),
+            'daftarbidkah' => DaftarBidangKeahlian::all(),
+            'idDosen' => $id,
+            'mengajars' => Mengajar::where('dosen_id', '=', $id)->get(),
+        ]);
+    }
 }

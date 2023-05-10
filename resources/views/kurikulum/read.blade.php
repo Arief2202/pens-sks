@@ -8,7 +8,7 @@
             </div>
             <div class="col-6">
                 <div class="d-flex justify-content-end ">
-                    <a class="btn btn-primary" href="/kurikulum/create" role="button">Tambahkan Data</a>
+                    <a class="btn btn-primary" href="/nama-kurikulum/create" role="button">Tambahkan Data</a>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                             <tr>
                               <td>{{$kurikulum['namaKurikulum']}}</td>
                               <td>
-                                  <a href="/kurikulum/update/{{$kurikulum->id}}"><i class='bx bx-pencil tableAction'></i></a>
+                                  <a href="/nama-kurikulum/update/{{$kurikulum->id}}"><i class='bx bx-pencil tableAction'></i></a>
                               </td>
                             </tr>
                             @endforeach

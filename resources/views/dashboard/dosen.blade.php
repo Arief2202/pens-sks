@@ -38,7 +38,7 @@
                               $totsks += $mengajar->mataKuliah()->sks;
                             ?>
                             @endforeach
-                            <tr>
+                            <tr class="total">
                               <td>Total</td>
                               <td></td>
                               <td>{{$totjam}}</td>

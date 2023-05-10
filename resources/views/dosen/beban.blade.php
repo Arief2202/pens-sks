@@ -1,69 +1,64 @@
 @extends('layouts.main')
 
+@section('style')
+    <link rel="stylesheet" href="css/bidangKeahlian/style.css">    
+@endsection
+
 @section('body')
     @include('sections.cardOpen')
-        <h5 class="card-title">Beban Dosen</h5>
-        @if(isset($errorMessage))
-        <div class="alert-danger mt-1 p-2">{{ $errorMessage }}</div>
-        @endif
-        <div style="max-height: 80vh; overflow-y:auto;">
-            <div class="card-text me-3">          
-                <div class="py-2">
-                    <label for="inputNama">Nama Dosen</label>
-                    <select name="namaDosen" class="form-select @if($request->idDosen == "")is-invalid @endif" id="namaDosenDropDown">
-                        <option selected hidden></option>
-                        @foreach($user as $dosen)
-                        <option @if($request->idDosen == $dosen->id) selected @endif value="{{$dosen['id']}}">{{$dosen['nama']}}</option>
-                        @endforeach
-                    </select>
-                    {{-- @error('namaDosen')
-                    <div class="alert-danger mt-1 p-2">{{ $message }}</div>
-                    @enderror --}}
-                </div>
-                @if($request->idDosen != "")
-                  <p>Beban Max dosen : {{$user->where('id', '=', $request->idDosen)->first()->bebanMengajar}}</p>
-                  <div style="max-height: 50vh; overflow-y:auto;">
-                    <div class="card-text me-3">
-                      <table class="table">
-                          <thead class="thead">
-                            <tr>
-                              <th class="th" scope="col">Tempat Mengajar</th>
-                              <th class="th" scope="col">Matkul</th>
-                              <th class="th" scope="col">Beban</th>
-                              <th class="th" scope="col">SKS</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach($mengajars as $mengajar)
-                            <tr>
-                              <td>{{$mengajar->prodi}} Semester {{$mengajar->semester}}</td>
-                              <td>{{$mengajar->mataKuliah()->namaMataKuliah}}</td>
-                              <td>{{$mengajar->mataKuliah()->jam}}</td>
-                              <td>{{$mengajar->mataKuliah()->sks}}</td>
+        <div class="row mb-4 mt-2">
+            <h5 class="card-title">Halaman Beban Dosen</h5>
+        </div>
+            <div style="max-height: 60vh; overflow-y:auto;">
+                <div class="card-text me-3">
+                    <table class="table">
+                        <thead class="thead">
+                          <tr>
+                            <th class="th" scope="col">NIP</th>
+                            <th class="th" scope="col">Nama Dosen</th>
+                            {{-- <th class="th" scope="col">Keahlian</th> --}}
+                            {{-- <th class="th" scope="col">Jabatan</th> --}}
+                            <th class="th" scope="col">Jatah</th>
+                            <th class="th" scope="col">Beban</th>
+                            <th class="th" scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($user as $dosen)
+                              <?php                                
+                                $bebanMax = (int) $user->where('id', '=', $dosen->id)->first()->bebanMengajar;
+                                $totjam = 0;
+                                $totsks = 0;
+                                $sameclass = false;
+                                $error = false;
+                                foreach($mengajar->where('dosen_id', '=', $dosen->id) as $ajar){                                  
+                                  $count = $ajar->where('prodi', '=', $ajar->prodi)
+                                              ->where('semester', '=', $ajar->semester)
+                                              ->where('kelas', '=', $ajar->kelas)->count();
+                                  if($count > 1) $sameclass = true;
+                                  $totjam += (int) $ajar->mataKuliah()->jam; 
+                                  $totsks += (int) $ajar->mataKuliah()->sks; 
+                                }            
+                                if($totjam > $bebanMax) $error = true;
+                              ?>
+                              <tr @if($error) class="error" @endif>
+                              <td>{{$dosen['nip']}}</td>
+                              <td>{{$dosen['nama']}}</td>
+                              <td>{{intval($dosen['bebanMengajar'])/* - $totalJam*/}}</td>
+                              <td>{{intval($totjam)/* - $totalJam*/}}</td>
+                              <td>
+                                <a href="/dosen/beban/{{$dosen->id}}" style="background:none;border:none;outline:none;"><i class='ms-2 bx bx-right-arrow-circle tableAction'></i></a>
+                              </td>
                             </tr>
                             @endforeach
-                          </tbody>
-                      </table>
-                    </div>
-                  </div>
-                @else
-                  <div class="alert alert-danger" role="alert">
-                    Silahkan pilih nama dosen terlebih dahulu
-                  </div> 
-                @endif
+                        </tbody>
+                    </table>                    
+                </div>
             </div>
-        </div>
     @include('sections.cardClose')
 @endsection
 
 
-@section('script')    
-        <script type="text/javascript">
-            $(document).ready(function(){  
-                $("#namaDosenDropDown").change(function() {    
-                    var idDosen = $(this).find(":selected").val();
-                    window.location.replace("http://sks-pens.site/dosen/profile?idDosen="+idDosen);
-                });
-            });
-        </script>    
+@section('js')
+    <script type="text/javascript" src="js/bidangKeahlian/script.js"></script> 
 @endsection

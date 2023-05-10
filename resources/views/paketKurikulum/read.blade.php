@@ -62,8 +62,19 @@
                             <option @if($request->kurikulum == $kurikulum->id) selected @endif value="{{$kurikulum->id}}">{{$kurikulum->namaKurikulum}}</option>
                             @endforeach
                         </select>     
-                    {{-- <input type="text" class="form-control" value="{{$kelas->kurikulum()->namaKurikulum}}" disabled>    --}}
                 </div>     
+
+                
+                @if($request->prodi != "" &&
+                $request->semester != "" &&
+                $request->kurikulum != "")
+                
+                <div class="col-lg-3"><br>
+                    <div class="d-flex justify-content-end ">
+                        <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Tambahkan Mata Kuliah</a>
+                    </div>                
+                </div>
+                @endif
                 {{-- <div class="col-lg-3"> 
                     @if($request->prodi != "" && $request->semester != "") 
                         <br>                  
@@ -77,30 +88,7 @@
             @if($request->prodi != "" &&
                 $request->semester != "" &&
                 $request->kurikulum != "")
-            <div class="row mt-3">
-                <div class="col mt-2">
-                    <h6>Total SKS : <b>
-                    <?php
-                        $totalSKS = 0;
-                        foreach($paketKurikulums as $paketKurikulum){
-                            $totalSKS += $paketKurikulum->mataKuliah()->sks;
-                        }                 
-                        echo $totalSKS;       
-                    ?>
-                    </b></h6>
-                </div>
-                <div class="col-7">
-                    <div class="d-flex justify-content-end ">
-                        <a class="btn btn-primary" href="/paketKurikulum/export_excel" role="button">Export Paket Kurikulum</a>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="d-flex justify-content-end ">
-                        <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" role="button">Tambahkan Mata Kuliah</a>
-                    </div>                
-                </div>
-            </div>
-        </div>
+        {{-- </div> --}}
 
         <div style="max-height: 60vh; overflow-y:auto;">
             <div class="card-text me-3">
@@ -113,7 +101,11 @@
                         <th class="th" scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody>                        
+                        <?php 
+                            $totjam = 0;
+                            $totsks = 0;
+                        ?>
                         @foreach ($paketKurikulums as $paketKurikulum)
                             <tr>
                                 <td>{{$paketKurikulum->mataKuliah()->namaMataKuliah}}</td>
@@ -130,7 +122,19 @@
                                     </form>
                                 </td>
                             </tr>
+                            
+                            <?php 
+                                $totjam += $paketKurikulum->mataKuliah()->jam; 
+                                $totsks += $paketKurikulum->mataKuliah()->sks;                            
+                            ?>
                         @endforeach
+                      <tr class="total">
+                        <td>Total</td>
+                        <td>{{$totsks}}</td>
+                        <td>{{$totjam}}</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
                     </tbody>
                 </table>                    
             </div>

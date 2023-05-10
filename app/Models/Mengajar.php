@@ -20,7 +20,7 @@ class Mengajar extends Model
     public function paketKurikulum(){
         return PaketKurikulum::where('id', $this->paketKurikulum_id)->first();
     }
-    public function Kurikulum(){
-        return Kurikulum::where('id', $this->kurikulum_id)->first();
+    public function namaKurikulum(){
+        return NamaKurikulum::where('id', $this->kurikulum_id)->first();
     }
 }

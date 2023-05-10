@@ -5,13 +5,19 @@ use App\Http\Controllers\ChangeDarkModeController;
 use App\Http\Controllers\changeSidebarStateController;
 use App\Http\Controllers\BidangKeahlianController;
 use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\PaketKurikulumController;
+use App\Http\Controllers\NamaKurikulumController;
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\KurikulumController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\SksMaksController;
 use App\Http\Controllers\MengajarController;
+use Illuminate\Support\Facades\Auth;
+
+use App\Exports\ExportAll;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +30,16 @@ use App\Http\Controllers\MengajarController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return view('LandingArief');
 });
+
+// Route::get('/landingArief', function () {
+//     return view('LandingArief');
+// });
+
+// Route::get('/landingFarhan', function () {
+//     return view('LandingFarhan');
+// });
 
 Route::middleware('auth')->group(function () {
 
@@ -60,7 +74,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/dosen/update/bidangKeahlian/add', 'saveEditBidangKeahlian');
         Route::post('/dosen/update/bidangKeahlian/delete', 'deleteEditBidangKeahlian');
         Route::get('/dosen/delete/{id}', 'deleteDosen');     
-        Route::get('/dosen/profile', 'bebanDosen');
+        Route::get('/dosen/beban', 'bebanDosen');
+        Route::get('/dosen/beban/{id}', 'detailBebanDosen');
     });
 
     Route::controller(PaketKurikulumController::class)->group(function () {
@@ -71,12 +86,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/paketKurikulum/export_excel', 'export_excel');
     });
 
-    Route::controller(KurikulumController::class)->group(function () {
-        Route::get('/kurikulum', 'read')->name('KurikulumCreate');
-        Route::get('/kurikulum/create', 'showCreate')->name('KurikulumStoreView');
-        Route::post('/kurikulum/create', 'saveCreate')->name('KurikulumStore');
-        Route::get('/kurikulum/update/{id}/', 'showUpdate')->name('KurikulumUpdateView');
-        Route::post('/kurikulum/update', 'saveUpdate')->name('KurikulumUpdate');
+    Route::controller(NamaKurikulumController::class)->group(function () {
+        Route::get('/nama-kurikulum', 'read')->name('KurikulumCreate');
+        Route::get('/nama-kurikulum/create', 'showCreate')->name('KurikulumStoreView');
+        Route::post('/nama-kurikulum/create', 'saveCreate')->name('KurikulumStore');
+        Route::get('/nama-kurikulum/update/{id}/', 'showUpdate')->name('KurikulumUpdateView');
+        Route::post('/nama-kurikulum/update', 'saveUpdate')->name('KurikulumUpdate');
+        Route::get('/kurikulum/history', 'history')->name('KurikulumHistory');
         
     });    
     Route::controller(KelasController::class)->group(function () {
@@ -89,11 +105,16 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(MengajarController::class)->group(function () {
         Route::get('/mengajar', 'read')->name('mengajar'); 
+        Route::get('/mengajar/lihat', 'lihat'); 
         Route::post('/mengajar', 'create');
         Route::post('/mengajar/delete', 'delete');
         Route::post('/mengajar/ubahKurikulum', 'ubahKurikulum');
     });
 
+    Route::get('/export', function(){
+        if(Auth::user()->role == '1') return (new ExportAll())->download('Pembebanan.xlsx');
+        else return redirect('/dashboard');
+    });
     Route::get('/siswa', 'SiswaController@index');
     Route::get('/siswa/export_excel', 'SiswaController@export_excel');
 });

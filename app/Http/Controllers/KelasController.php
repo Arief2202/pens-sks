@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreKelasRequest;
 use App\Http\Requests\UpdateKelasRequest;
 use App\Models\Kelas;
-use App\Models\Kurikulum;
+use App\Models\NamaKurikulum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +30,7 @@ class KelasController extends Controller
             return redirect('dashboard');
         };
 
-        $namaKurikulum = Kurikulum::all();
+        $namaKurikulum = NamaKurikulum::all();
         return view('kelas.create', [
             'kurikulum' => $namaKurikulum,
         ]);
@@ -57,7 +57,7 @@ class KelasController extends Controller
                             ->where('semester', '=', $request->semester)
                             ->first();
         if($queryValid){
-            $namaKurikulum = Kurikulum::all();
+            $namaKurikulum = NamaKurikulum::all();
             return view('kelas.create', [
                 'kurikulum' => $namaKurikulum,
                 'errorMessage' => 'Data sudah ada di database',
@@ -84,7 +84,7 @@ class KelasController extends Controller
         };
 
         $kls = Kelas::where('id', $id)->first();
-        $kuri = Kurikulum::all();
+        $kuri = NamaKurikulum::all();
         return view('kelas.update', [
             'kelas' => $kls,
             'kurikulum' => $kuri,
@@ -114,7 +114,7 @@ class KelasController extends Controller
                             ->first();
         if($queryValid){
             $kls = Kelas::where('id', $request->idKelas)->first();
-            $kuri = Kurikulum::all();
+            $kuri = NamaKurikulum::all();
             return view('kelas.update', [
                 'kelas' => $kls,
                 'kurikulum' => $kuri,
